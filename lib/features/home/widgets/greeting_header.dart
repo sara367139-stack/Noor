@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hijri/hijri_calendar.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_radius.dart';
@@ -13,8 +16,23 @@ class GreetingHeader extends StatelessWidget {
     required this.userName,
   });
 
+  String getGreeting(AppLocalizations lang) {
+    final hour = DateTime.now().hour;
+
+    if (hour < 12) {
+      return lang.goodMorning;
+    } else if (hour < 17) {
+      return lang.goodAfternoon;
+    } else {
+      return lang.goodEvening;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final lang = AppLocalizations.of(context)!;
+    // ignore: unused_local_variable
+    final hijri = HijriCalendar.now();
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.lg,
@@ -42,7 +60,7 @@ class GreetingHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Assalamu Alaikum",
+                  getGreeting(lang),
                   style: AppTextStyles.bodySmall.copyWith(
                     color: Theme.of(context)
                         .colorScheme
@@ -51,19 +69,26 @@ class GreetingHeader extends StatelessWidget {
                         .withOpacity(.7),
                   ),
                 ),
+const SizedBox(height: 4),
 
-                Text(
-                  userName,
-                  style: AppTextStyles.heading3.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
-                ),
+Text(
+  "${hijri.hDay} ${hijri.longMonthName} ${hijri.hYear} هـ",
+  style: AppTextStyles.bodySmall.copyWith(
+    color: Theme.of(context)
+        .colorScheme
+        .onSurface
+        // ignore: deprecated_member_use
+        .withOpacity(.7),
+  ),
+),
               ],
             ),
           ),
 
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.push("/profile");
+            },
             icon: const Icon(
               Icons.settings_outlined,
               color: AppColors.primary,

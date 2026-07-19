@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-// import '../../../../../core/constants/app_colors.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 class HomeBottomNavigation extends StatelessWidget {
   final int currentIndex;
@@ -13,6 +12,8 @@ class HomeBottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = AppLocalizations.of(context)!;
+
     return BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: (index) {
@@ -31,22 +32,22 @@ class HomeBottomNavigation extends StatelessWidget {
             break;
         }
       },
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
+          icon: const Icon(Icons.home),
+          label: lang.home,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.menu_book),
-          label: 'Quran',
+          icon: const Icon(Icons.menu_book),
+          label: lang.quran,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
-          label: 'Dhikr',
+          icon: const Icon(Icons.favorite),
+          label: lang.adhkar,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
+          icon: const Icon(Icons.person),
+          label: lang.profile,
         ),
       ],
     );

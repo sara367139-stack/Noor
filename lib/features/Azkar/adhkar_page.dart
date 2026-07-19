@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+// import 'package:go_router/go_router.dart';
 
 class AdhkarPage extends StatelessWidget {
   const AdhkarPage({super.key});
@@ -24,7 +24,7 @@ class AdhkarPage extends StatelessWidget {
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
         itemCount: adhkar.length,
-        separatorBuilder: (_, __) => const SizedBox(height: 12),
+        separatorBuilder: (_, _) => const SizedBox(height: 12),
         itemBuilder: (context, index) {
           return Card(
             elevation: 2,
@@ -49,7 +49,7 @@ class AdhkarPage extends StatelessWidget {
               ),
               trailing: const Icon(Icons.arrow_forward_ios, size: 18),
               onTap: () {
-                context.push("/dhikr");
+                // context.push("/dhikr");
               },
             ),
           );

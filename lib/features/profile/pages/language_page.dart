@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:noorah/core/constants/app_colors.dart';
 import 'package:noorah/core/constants/app_spacing.dart';
+import 'package:noorah/core/constants/language_provider.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
-class LanguagePage extends StatefulWidget {
+class LanguagePage extends ConsumerStatefulWidget {
   const LanguagePage({super.key});
 
   @override
-  State<LanguagePage> createState() => _LanguagePageState();
+  ConsumerState<LanguagePage> createState() => _LanguagePageState();
 }
 
-class _LanguagePageState extends State<LanguagePage> {
-  String selectedLanguage = "العربية";
-
-  final languages = [
-    "العربية",
-    "English",
-  ];
-
+class _LanguagePageState extends ConsumerState<LanguagePage> {
   @override
   Widget build(BuildContext context) {
+    final locale = ref.watch(languageProvider);
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
 
       appBar: AppBar(
-        title: const Text(
-          "Language",
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context)!.language,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -34,14 +33,12 @@ class _LanguagePageState extends State<LanguagePage> {
 
       body: Padding(
         padding: const EdgeInsets.all(AppSpacing.lg),
-
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
-            const Text(
-              "Choose your language",
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.language,
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
@@ -49,47 +46,53 @@ class _LanguagePageState extends State<LanguagePage> {
 
             const SizedBox(height: AppSpacing.md),
 
-            ...languages.map(
-              (language) => Card(
-                elevation: 0,
-                margin: const EdgeInsets.only(
-                  bottom: 12,
+            Card(
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+                side: BorderSide(
+                  color: locale.languageCode == "ar"
+                      ? AppColors.primary
+                      : Colors.grey.shade300,
                 ),
-
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  side: BorderSide(
-                    color: selectedLanguage == language
-                        ? AppColors.primary
-                        : Colors.grey.shade300,
-                  ),
-                ),
-
-                child: RadioListTile(
-                  value: language,
-                  // ignore: deprecated_member_use
-                  groupValue: selectedLanguage,
-
-                  activeColor: AppColors.primary,
-
-                  title: Text(
-                    language,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-
-                  // ignore: deprecated_member_use
-                  onChanged: (value) {
-                    setState(() {
-                      selectedLanguage = value!;
-                    });
-                  },
-                ),
+              ),
+              child: RadioListTile<String>(
+                value: "ar",
+                groupValue: locale.languageCode,
+                activeColor: AppColors.primary,
+                title: const Text("العربية"),
+                onChanged: (value) {
+                  ref
+                      .read(languageProvider.notifier)
+                      .changeLanguage("ar");
+                },
               ),
             ),
 
+            const SizedBox(height: 12),
+
+            Card(
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+                side: BorderSide(
+                  color: locale.languageCode == "en"
+                      ? AppColors.primary
+                      : Colors.grey.shade300,
+                ),
+              ),
+              child: RadioListTile<String>(
+                value: "en",
+                groupValue: locale.languageCode,
+                activeColor: AppColors.primary,
+                title: const Text("English"),
+                onChanged: (value) {
+                  ref
+                      .read(languageProvider.notifier)
+                      .changeLanguage("en");
+                },
+              ),
+            ),
           ],
         ),
       ),

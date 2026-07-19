@@ -1,24 +1,60 @@
 import 'package:flutter/material.dart';
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({super.key});
+  final String name;
+  final String email;
+  final String photoUrl;
+  final VoidCallback? onImageTap;
+
+  const ProfileHeader({
+    super.key,
+    required this.name,
+    required this.email,
+    required this.photoUrl,
+    this.onImageTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Stack(
+          alignment: Alignment.bottomRight,
+          children: [
+            GestureDetector(
+              onTap: onImageTap,
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: photoUrl.isNotEmpty
+                    ? NetworkImage(photoUrl)
+                    : const AssetImage(
+                        "assets/images/profile.png",
+                      ) as ImageProvider,
+              ),
+            ),
 
-        const CircleAvatar(
-  radius: 50,
-  backgroundImage: AssetImage(
-    "assets/images/profile.png",
-  ),
-),
+            GestureDetector(
+              onTap: onImageTap,
+              child: Container(
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primary,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.camera_alt,
+                  size: 18,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+            ),
+          ],
+        ),
 
         const SizedBox(height: 15),
 
         Text(
-          "Sara Mohamed",
+          name,
           style: TextStyle(
             fontSize: 24,
             color: Theme.of(context).colorScheme.onSurface,
@@ -29,10 +65,13 @@ class ProfileHeader extends StatelessWidget {
         const SizedBox(height: 6),
 
         Text(
-          "Minya, Egypt",
+          email,
           style: TextStyle(
-            // ignore: deprecated_member_use
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+            color: Theme.of(context)
+                .colorScheme
+                .onSurface
+                // ignore: deprecated_member_use
+                .withOpacity(0.7),
           ),
         ),
       ],

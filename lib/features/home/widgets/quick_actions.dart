@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
@@ -10,6 +11,8 @@ class QuickActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.lg,
@@ -19,8 +22,8 @@ class QuickActions extends StatelessWidget {
           Expanded(
             child: _ActionCard(
               icon: Icons.explore,
-              title: "Qibla",
-              subtitle: "Finder",
+              title: lang.qibla,
+              subtitle: lang.finder,
               onTap: () {
                 context.push("/qibla");
               },
@@ -32,10 +35,10 @@ class QuickActions extends StatelessWidget {
           Expanded(
             child: _ActionCard(
               icon: Icons.auto_awesome,
-              title: "Morning & Evening",
-              subtitle: "Adhkar",
+              title: lang.morningEvening,
+              subtitle: lang.adhkar,
               onTap: () {
-               context.push("/adhkar");
+                context.push("/adhkar");
               },
             ),
           ),

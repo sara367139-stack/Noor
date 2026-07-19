@@ -14,7 +14,7 @@ class AppTheme {
     brightness: Brightness.light,
     useMaterial3: true,
 
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: const Color.fromARGB(255, 159, 161, 169),
 
     colorScheme: ColorScheme.fromSeed(
     seedColor: AppColors.primary,
@@ -27,17 +27,17 @@ class AppTheme {
   displayColor: Colors.black,
 ),
 
-    cardColor: Colors.white,
+    cardColor: const Color.fromARGB(255, 208, 205, 205),
 
     appBarTheme: const AppBarTheme(
       centerTitle: true,
       elevation: 0,
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 159, 161, 169),
       foregroundColor: Colors.black,
     ),
 
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 219, 216, 216),
       selectedItemColor: AppColors.primary,
       unselectedItemColor: Colors.grey,
       type: BottomNavigationBarType.fixed,
@@ -48,40 +48,50 @@ class AppTheme {
   // Dark Theme
   //======================
 
-  static ThemeData darkTheme = ThemeData(
-    brightness: Brightness.dark,
-    useMaterial3: true,
-
-    scaffoldBackgroundColor: const Color(0xff102E4B),
-
-    colorScheme: ColorScheme.fromSeed(
-  seedColor: AppColors.primary,
+ static ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
-).copyWith(
-  onSurface: Colors.white,
-),
+  useMaterial3: true,
 
-   textTheme: GoogleFonts.cairoTextTheme(
-  ThemeData.dark().textTheme,
-).apply(
-  bodyColor: Colors.white,
-  displayColor: Colors.white,
-),
+  scaffoldBackgroundColor: const Color(0xff102E4B),
 
-    cardColor: const Color(0xff173B63),
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: AppColors.primary,
+    brightness: Brightness.dark,
+  ).copyWith(
+    surface: const Color(0xff173B63),
+    onSurface: Colors.white,
+  ),
 
-    appBarTheme: const AppBarTheme(
-      centerTitle: true,
-      elevation: 0,
-      backgroundColor: Color(0xff102E4B),
-      foregroundColor: Colors.white,
-    ),
+  textTheme: GoogleFonts.cairoTextTheme(
+    ThemeData.dark().textTheme,
+  ).apply(
+    bodyColor: Colors.white,
+    displayColor: Colors.white,
+  ),
 
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Color(0xff102E4B),
-      selectedItemColor: AppColors.primary,
-      unselectedItemColor: Colors.white70,
-      type: BottomNavigationBarType.fixed,
-    ),
-  );
+  cardColor: const Color(0xff173B63),
+
+  cardTheme: const CardThemeData(
+    color: Color(0xff173B63),
+    elevation: 0,
+  ),
+
+  iconTheme: const IconThemeData(
+    color: Colors.white,
+  ),
+
+  appBarTheme: const AppBarTheme(
+    centerTitle: true,
+    elevation: 0,
+    backgroundColor: Color(0xff102E4B),
+    foregroundColor: Colors.white,
+  ),
+
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: Color(0xff102E4B),
+    selectedItemColor: AppColors.primary,
+    unselectedItemColor: Colors.white70,
+    type: BottomNavigationBarType.fixed,
+  ),
+);
 }

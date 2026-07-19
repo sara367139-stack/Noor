@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_radius.dart';
@@ -43,6 +44,8 @@ class _ContinueReadingCardState
 
   @override
   Widget build(BuildContext context) {
+    final lang = AppLocalizations.of(context)!;
+
     return InkWell(
       borderRadius: BorderRadius.circular(AppRadius.lg),
       onTap: () {
@@ -73,7 +76,7 @@ class _ContinueReadingCardState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Continue Reading",
+              lang.continueReading,
               style: AppTextStyles.bodySmall.copyWith(
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
@@ -91,7 +94,7 @@ class _ContinueReadingCardState
             const SizedBox(height: 6),
 
             Text(
-              "Surah $surahNumber",
+              "${lang.surah} $surahNumber",
               style: AppTextStyles.bodyMedium.copyWith(
                 color: Theme.of(context).colorScheme.onPrimary,
               ),

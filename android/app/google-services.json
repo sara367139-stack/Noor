@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "52234340227",
+    "project_id": "final-project-84d31",
+    "storage_bucket": "final-project-84d31.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52234340227:android:9e826513d6838806ead8b6",
+        "android_client_info": {
+          "package_name": "com.example.noorah"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSSgHg3O5H5STG0IOghyTpkpGzcwrOKvU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

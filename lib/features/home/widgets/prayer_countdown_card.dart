@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 import '../../../../../core/constants/app_radius.dart';
 import '../../../../../core/constants/app_spacing.dart';
@@ -18,6 +19,8 @@ class PrayerCountdownCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.lg,
@@ -32,7 +35,7 @@ class PrayerCountdownCard extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "Up Next",
+              lang.upNext,
               style: AppTextStyles.bodyMedium.copyWith(
                 color: Theme.of(context).colorScheme.primary,
               ),

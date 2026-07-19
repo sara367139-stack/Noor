@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
- import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_ar.dart';
@@ -95,11 +95,29 @@ abstract class AppLocalizations {
     Locale('en')
   ];
 
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
   /// No description provided for @home.
   ///
   /// In en, this message translates to:
   /// **'Home'**
   String get home;
+
+  /// No description provided for @quran.
+  ///
+  /// In en, this message translates to:
+  /// **'Quran'**
+  String get quran;
+
+  /// No description provided for @adhkar.
+  ///
+  /// In en, this message translates to:
+  /// **'Adhkar'**
+  String get adhkar;
 
   /// No description provided for @profile.
   ///
@@ -107,17 +125,215 @@ abstract class AppLocalizations {
   /// **'Profile'**
   String get profile;
 
+  /// No description provided for @continueReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue Reading'**
+  String get continueReading;
+
+  /// No description provided for @qibla.
+  ///
+  /// In en, this message translates to:
+  /// **'Qibla'**
+  String get qibla;
+
+  /// No description provided for @finder.
+  ///
+  /// In en, this message translates to:
+  /// **'Finder'**
+  String get finder;
+
+  /// No description provided for @remembrance.
+  ///
+  /// In en, this message translates to:
+  /// **'Remembrance'**
+  String get remembrance;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// No description provided for @rateApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate App'**
+  String get rateApp;
+
+  /// No description provided for @darkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkMode;
+
   /// No description provided for @settings.
   ///
   /// In en, this message translates to:
   /// **'Settings'**
   String get settings;
 
-  /// No description provided for @language.
+  /// No description provided for @asrPrayer.
   ///
   /// In en, this message translates to:
-  /// **'Language'**
-  String get language;
+  /// **'Asr Prayer'**
+  String get asrPrayer;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Minya, Egypt'**
+  String get location;
+
+  /// No description provided for @errorLoadingPrayerTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading prayer times'**
+  String get errorLoadingPrayerTimes;
+
+  /// No description provided for @chooseLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your language'**
+  String get chooseLanguage;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get arabic;
+
+  /// No description provided for @prayerTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'Prayer Times'**
+  String get prayerTimes;
+
+  /// No description provided for @todayVerse.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Ayah'**
+  String get todayVerse;
+
+  /// No description provided for @welcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome'**
+  String get welcome;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @morningEvening.
+  ///
+  /// In en, this message translates to:
+  /// **'Morning & Evening'**
+  String get morningEvening;
+
+  /// No description provided for @upNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Up Next'**
+  String get upNext;
+
+  /// No description provided for @surah.
+  ///
+  /// In en, this message translates to:
+  /// **'Surah'**
+  String get surah;
+
+  /// No description provided for @dailyAyah.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Ayah'**
+  String get dailyAyah;
+
+  /// No description provided for @hardshipEase.
+  ///
+  /// In en, this message translates to:
+  /// **'Indeed, with hardship comes ease.'**
+  String get hardshipEase;
+
+  /// No description provided for @surahAshSharh.
+  ///
+  /// In en, this message translates to:
+  /// **'Surah Ash-Sharh'**
+  String get surahAshSharh;
+
+  /// No description provided for @assalamuAlaikum.
+  ///
+  /// In en, this message translates to:
+  /// **'Assalamu Alaikum'**
+  String get assalamuAlaikum;
+
+  /// No description provided for @todayPrayers.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Prayers'**
+  String get todayPrayers;
+
+  /// No description provided for @fajr.
+  ///
+  /// In en, this message translates to:
+  /// **'Fajr'**
+  String get fajr;
+
+  /// No description provided for @dhuhr.
+  ///
+  /// In en, this message translates to:
+  /// **'Dhuhr'**
+  String get dhuhr;
+
+  /// No description provided for @asr.
+  ///
+  /// In en, this message translates to:
+  /// **'Asr'**
+  String get asr;
+
+  /// No description provided for @maghrib.
+  ///
+  /// In en, this message translates to:
+  /// **'Maghrib'**
+  String get maghrib;
+
+  /// No description provided for @isha.
+  ///
+  /// In en, this message translates to:
+  /// **'Isha'**
+  String get isha;
+
+  /// No description provided for @goodMorning.
+  ///
+  /// In en, this message translates to:
+  /// **'Good Morning'**
+  String get goodMorning;
+
+  /// No description provided for @goodAfternoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Good Afternoon'**
+  String get goodAfternoon;
+
+  /// No description provided for @goodEvening.
+  ///
+  /// In en, this message translates to:
+  /// **'Good Evening'**
+  String get goodEvening;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

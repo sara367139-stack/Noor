@@ -14,7 +14,7 @@ class AppColors {
   static const Color secondary = Color.fromARGB(255, 20, 57, 91);
 
   /// Light Background
-  static const Color tertiary = Color(0xFFF8FAFC);
+  static const Color tertiary = Color.fromARGB(255, 171, 178, 186);
 
   /// Neutral Gray
   static const Color neutral = Color(0xFF64748B);
@@ -30,7 +30,7 @@ class AppColors {
   // Text
   // ==========================
 
-  static const Color textPrimary = Color.fromARGB(255, 219, 221, 226);
+  static const Color textPrimary = Color.fromARGB(255, 172, 177, 188);
   static const Color textSecondary = Color.fromARGB(255, 128, 142, 161);
 
   static const Color textWhite = Colors.white;
