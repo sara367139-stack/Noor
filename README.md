@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # noorah
 
 A new Flutter project.
