@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noorah/l10n/app_localizations.dart';
 
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
@@ -11,19 +10,16 @@ class QuickActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lang = AppLocalizations.of(context)!;
-
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.lg,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: _ActionCard(
               icon: Icons.explore,
-              title: lang.qibla,
-              subtitle: lang.finder,
+              title: "Qibla",
+              subtitle: "Finder",
               onTap: () {
                 context.push("/qibla");
               },
@@ -35,8 +31,8 @@ class QuickActions extends StatelessWidget {
           Expanded(
             child: _ActionCard(
               icon: Icons.auto_awesome,
-              title: lang.morningEvening,
-              subtitle: lang.adhkar,
+              title: "Muslim",
+              subtitle: "Adhkar",
               onTap: () {
                 context.push("/adhkar");
               },
@@ -67,7 +63,6 @@ class _ActionCard extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(AppRadius.lg),
       child: Container(
-        height: 150,
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
@@ -80,17 +75,12 @@ class _ActionCard extends StatelessWidget {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: Theme.of(context)
-                    .colorScheme
-                    .primary
+                color: Theme.of(context).colorScheme.primary
                     // ignore: deprecated_member_use
                     .withOpacity(.15),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(
-                icon,
-                color: Theme.of(context).colorScheme.primary,
-              ),
+              child: Icon(icon, color: Theme.of(context).colorScheme.primary),
             ),
 
             const SizedBox(height: 18),
@@ -100,6 +90,8 @@ class _ActionCard extends StatelessWidget {
               style: AppTextStyles.heading3.copyWith(
                 color: Theme.of(context).colorScheme.onSurface,
               ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
 
             const SizedBox(height: 4),
@@ -107,12 +99,12 @@ class _ActionCard extends StatelessWidget {
             Text(
               subtitle,
               style: AppTextStyles.bodySmall.copyWith(
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSurface
+                color: Theme.of(context).colorScheme.onSurface
                     // ignore: deprecated_member_use
                     .withOpacity(.7),
               ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

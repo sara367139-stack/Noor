@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/app_colors.dart';
 
 class ProfileTile extends StatelessWidget {
-
   final IconData icon;
   final String title;
   final VoidCallback? onTap;
@@ -18,21 +17,20 @@ class ProfileTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       color: Theme.of(context).cardColor,
       margin: const EdgeInsets.only(bottom: 15),
 
       child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         onTap: onTap,
-        leading: Icon(
-          icon,
-          color: AppColors.primary,
-        ),
+        leading: Icon(icon, color: AppColors.primary),
 
         title: Text(
           title,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
+          style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
 
         trailing: Icon(

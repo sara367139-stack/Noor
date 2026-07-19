@@ -13,40 +13,39 @@ class QuranPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const HomeBottomNavigation(
-  currentIndex: 1,
-),
+      bottomNavigationBar: const HomeBottomNavigation(currentIndex: 1),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
-  children: [
-    const QuranAppBar(),
-
-    const ContinueReadingCard(),
-
-    const SearchSurah(),
-
-    Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.lg,
-        vertical: AppSpacing.md,
-      ),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          "All Surahs",
-          style: AppTextStyles.heading2,
+          children: [
+            const QuranAppBar(),
+            const ContinueReadingCard(),
+            const SearchSurah(),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.lg,
+                vertical: AppSpacing.sm,
+              ),
+              child: Row(
+                children: [
+                  Text(
+                    "All Surahs",
+                    style: AppTextStyles.heading2.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                  const Spacer(),
+                  Icon(
+                    Icons.sort_rounded,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ],
+              ),
+            ),
+            const Expanded(child: SurahListWidget()),
+          ],
         ),
-      ),
-    ),
-
-    const Expanded(
-      child: SurahListWidget(),
-    ),
-  ],
-)
       ),
     );
   }
 }
-

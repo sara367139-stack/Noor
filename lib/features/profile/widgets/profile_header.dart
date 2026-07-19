@@ -1,80 +1,153 @@
 import 'package:flutter/material.dart';
+import 'package:noorah/core/constants/app_colors.dart';
+import 'package:noorah/core/constants/app_radius.dart';
+import 'package:noorah/core/constants/app_spacing.dart';
+import 'package:noorah/core/theme/app_text_styles.dart';
 
 class ProfileHeader extends StatelessWidget {
-  final String name;
-  final String email;
-  final String photoUrl;
-  final VoidCallback? onImageTap;
+  final String userName;
+  final String location;
+  final VoidCallback onEdit;
 
   const ProfileHeader({
     super.key,
-    required this.name,
-    required this.email,
-    required this.photoUrl,
-    this.onImageTap,
+    required this.userName,
+    required this.location,
+    required this.onEdit,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Stack(
-          alignment: Alignment.bottomRight,
-          children: [
-            GestureDetector(
-              onTap: onImageTap,
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: photoUrl.isNotEmpty
-                    ? NetworkImage(photoUrl)
-                    : const AssetImage(
-                        "assets/images/profile.png",
-                      ) as ImageProvider,
-              ),
-            ),
+    final colorScheme = Theme.of(context).colorScheme;
+    final displayName = userName.trim();
+    final cleanLocation = location.trim();
+    final initials = displayName
+        .split(RegExp(r'\s+'))
+        .where((part) => part.isNotEmpty)
+        .take(2)
+        .map((part) => part[0].toUpperCase())
+        .join();
 
-            GestureDetector(
-              onTap: onImageTap,
-              child: Container(
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
-                  shape: BoxShape.circle,
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(AppRadius.lg),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.primary.withValues(alpha: .22),
+            blurRadius: 24,
+            offset: const Offset(0, 12),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        initials.isEmpty ? 'Settings' : 'Personal settings',
+                        style: AppTextStyles.bodySmall.copyWith(
+                          color: colorScheme.onPrimary.withValues(alpha: .76),
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: AppSpacing.xs),
+                      Text(
+                        displayName,
+                        style: AppTextStyles.heading2.copyWith(
+                          color: colorScheme.onPrimary,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: AppSpacing.xs),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.location_on_outlined,
+                            size: 18,
+                            color: colorScheme.onPrimary.withValues(alpha: .82),
+                          ),
+                          const SizedBox(width: AppSpacing.xs),
+                          Expanded(
+                            child: Text(
+                              cleanLocation,
+                              style: AppTextStyles.bodyMedium.copyWith(
+                                color: colorScheme.onPrimary.withValues(
+                                  alpha: .82,
+                                ),
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                child: Icon(
-                  Icons.camera_alt,
-                  size: 18,
-                  color: Theme.of(context).colorScheme.onPrimary,
+                IconButton.filledTonal(
+                  tooltip: 'Edit profile',
+                  onPressed: onEdit,
+                  icon: const Icon(Icons.edit_outlined),
                 ),
-              ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.lg),
+            Wrap(
+              spacing: AppSpacing.sm,
+              runSpacing: AppSpacing.sm,
+              children: const [
+                _ProfileStat(icon: Icons.menu_book_rounded, label: 'Quran'),
+                _ProfileStat(icon: Icons.explore_rounded, label: 'Qibla'),
+                _ProfileStat(icon: Icons.auto_awesome_rounded, label: 'Azkar'),
+              ],
             ),
           ],
         ),
+      ),
+    );
+  }
+}
 
-        const SizedBox(height: 15),
+class _ProfileStat extends StatelessWidget {
+  final IconData icon;
+  final String label;
 
-        Text(
-          name,
-          style: TextStyle(
-            fontSize: 24,
-            color: Theme.of(context).colorScheme.onSurface,
-            fontWeight: FontWeight.bold,
+  const _ProfileStat({required this.icon, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: .14),
+        borderRadius: BorderRadius.circular(AppRadius.full),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 18, color: Colors.white),
+          const SizedBox(width: AppSpacing.xs),
+          Text(
+            label,
+            style: AppTextStyles.bodySmall.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-        ),
-
-        const SizedBox(height: 6),
-
-        Text(
-          email,
-          style: TextStyle(
-            color: Theme.of(context)
-                .colorScheme
-                .onSurface
-                // ignore: deprecated_member_use
-                .withOpacity(0.7),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

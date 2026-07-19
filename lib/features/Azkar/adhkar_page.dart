@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:go_router/go_router.dart';
+import 'package:go_router/go_router.dart';
 
 class AdhkarPage extends StatelessWidget {
   const AdhkarPage({super.key});
@@ -17,14 +17,11 @@ class AdhkarPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("الأذكار"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text("الأذكار"), centerTitle: true),
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
         itemCount: adhkar.length,
-        separatorBuilder: (_, _) => const SizedBox(height: 12),
+        separatorBuilder: (context, index) => const SizedBox(height: 12),
         itemBuilder: (context, index) {
           return Card(
             elevation: 2,
@@ -36,10 +33,7 @@ class AdhkarPage extends StatelessWidget {
                 horizontal: 20,
                 vertical: 10,
               ),
-              leading: const Icon(
-                Icons.auto_awesome,
-                color: Colors.green,
-              ),
+              leading: const Icon(Icons.auto_awesome, color: Colors.green),
               title: Text(
                 adhkar[index],
                 style: const TextStyle(
@@ -49,7 +43,7 @@ class AdhkarPage extends StatelessWidget {
               ),
               trailing: const Icon(Icons.arrow_forward_ios, size: 18),
               onTap: () {
-                // context.push("/dhikr");
+                context.push("/dhikr");
               },
             ),
           );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:noorah/core/constants/app_colors.dart';
 import 'package:noorah/core/constants/app_spacing.dart';
 
@@ -10,24 +11,28 @@ class RatePage extends StatefulWidget {
 }
 
 class _RatePageState extends State<RatePage> {
-
   int selectedRate = 0;
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_rounded),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/profile');
+            }
+          },
+        ),
         title: const Text(
           "Rate Noorah",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
-
 
       body: Padding(
         padding: const EdgeInsets.all(AppSpacing.lg),
@@ -36,98 +41,56 @@ class _RatePageState extends State<RatePage> {
           mainAxisAlignment: MainAxisAlignment.center,
 
           children: [
-
-            Icon(
-              Icons.favorite,
-              size: 70,
-              color: AppColors.primary,
-            ),
-
-
-            const SizedBox(
-              height: AppSpacing.md,
-            ),
-
-
             const Text(
               "Enjoying Noorah?",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
 
-
-            const SizedBox(
-              height: 8,
-            ),
-
+            const SizedBox(height: 8),
 
             const Text(
               "Your feedback helps us improve your daily Islamic journey.",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-              ),
+              style: TextStyle(fontSize: 16),
             ),
 
-
-            const SizedBox(
-              height: AppSpacing.lg,
-            ),
-
+            const SizedBox(height: AppSpacing.lg),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
 
-              children: List.generate(
-                5,
-                (index){
+              children: List.generate(5, (index) {
+                final starIndex = index + 1;
 
-                  final starIndex = index + 1;
+                return IconButton(
+                  onPressed: () {
+                    setState(() {
+                      selectedRate = starIndex;
+                    });
+                  },
 
-                  return IconButton(
+                  icon: Icon(
+                    starIndex <= selectedRate ? Icons.star : Icons.star_border,
 
-                    onPressed: (){
-                      setState(() {
-                        selectedRate = starIndex;
-                      });
-                    },
+                    size: 40,
 
-                    icon: Icon(
-
-                      starIndex <= selectedRate
-                          ? Icons.star
-                          : Icons.star_border,
-
-                      size: 40,
-
-                      color: starIndex <= selectedRate
-                          ? Colors.amber
-                          : Colors.grey,
-
-                    ),
-                  );
-                },
-              ),
+                    color: starIndex <= selectedRate
+                        ? Colors.amber
+                        : Colors.grey,
+                  ),
+                );
+              }),
             ),
 
-
-            const SizedBox(
-              height: AppSpacing.lg,
-            ),
-
+            const SizedBox(height: AppSpacing.lg),
 
             SizedBox(
               width: double.infinity,
 
               child: ElevatedButton(
-
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 15,
-                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 15),
 
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -137,36 +100,22 @@ class _RatePageState extends State<RatePage> {
                 onPressed: selectedRate == 0
                     ? null
                     : () {
-
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text(
-                              "Thank you for your rating 🤍",
-                            ),
+                            content: Text("Thank you for your rating 🤍"),
                           ),
                         );
-
                       },
 
                 child: const Text(
                   "Submit Rating",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
             ),
-
           ],
         ),
       ),
     );
   }
 }
-
-
-
-
-

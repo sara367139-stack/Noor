@@ -22,9 +22,7 @@ class PrayerCountdownCard extends StatelessWidget {
     final lang = AppLocalizations.of(context)!;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.lg,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(AppSpacing.lg),
@@ -81,14 +79,17 @@ class PrayerCountdownCard extends StatelessWidget {
 
                 const SizedBox(width: 6),
 
-                Text(
-                  location,
-                  style: AppTextStyles.bodyMedium.copyWith(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        // ignore: deprecated_member_use
-                        .withOpacity(.7),
+                Flexible(
+                  child: Text(
+                    location.trim(),
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.bodyMedium.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface
+                          // ignore: deprecated_member_use
+                          .withOpacity(.7),
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],

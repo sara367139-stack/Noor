@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:noorah/core/user/user_profile_provider.dart';
 
 import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/constants/app_spacing.dart';
@@ -15,111 +15,59 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage>
-    with SingleTickerProviderStateMixin {
-  late AnimationController controller;
-  late Animation<double> fadeAnimation;
-  late Animation<double> scaleAnimation;
-
+class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
 
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    );
+    Timer(const Duration(seconds: 4), () async {
+      final hasSavedProfile = await UserProfileNotifier.hasSavedProfile();
 
-    fadeAnimation = Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(
-      CurvedAnimation(
-        parent: controller,
-        curve: Curves.easeIn,
-      ),
-    );
-
-    scaleAnimation = Tween<double>(
-      begin: .6,
-      end: 1,
-    ).animate(
-      CurvedAnimation(
-        parent: controller,
-        curve: Curves.easeOutBack,
-      ),
-    );
-
-    controller.forward();
-
-    Timer(const Duration(seconds: 3), () {
-      if (!mounted) return;
-
-      final user = FirebaseAuth.instance.currentUser;
-
-      if (user != null) {
-        context.go('/home');
-      } else {
-        context.go('/login');
+      if (mounted) {
+        context.go(hasSavedProfile ? '/home' : '/setup');
       }
     });
   }
 
   @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff102E4B),
-      body: Center(
-        child: FadeTransition(
-          opacity: fadeAnimation,
-          child: ScaleTransition(
-            scale: scaleAnimation,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.menu_book_rounded,
-                  size: AppSizes.iconXLarge,
-                  color: Colors.white,
+      backgroundColor: Color.fromARGB(255, 16, 46, 75),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.menu_book_rounded,
+                size: AppSizes.iconXLarge,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+
+              const SizedBox(height: AppSpacing.xl),
+
+              Text(
+                " AL Noor",
+                style: AppTextStyles.displayLarge.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
+              ),
 
-                const SizedBox(height: AppSpacing.xl),
+              const SizedBox(height: AppSpacing.sm),
 
-                Text(
-                  "Al Noor",
-                  style: AppTextStyles.displayLarge.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+              Text(
+                "Your Daily Islamic Companion",
+                style: AppTextStyles.bodyMedium.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
+              ),
 
-                const SizedBox(height: AppSpacing.sm),
+              const SizedBox(height: AppSpacing.xxl),
 
-                Text(
-                  "Your Daily Islamic Companion",
-                  style: AppTextStyles.bodyMedium.copyWith(
-                    color: Colors.white70,
-                  ),
-                ),
-
-                const SizedBox(height: 50),
-
-                const SizedBox(
-                  width: 30,
-                  height: 30,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 3,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
+              CircularProgressIndicator(
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+            ],
           ),
         ),
       ),
