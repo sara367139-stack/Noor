@@ -113,6 +113,8 @@ class _ActionCard extends StatelessWidget {
                     // ignore: deprecated_member_use
                     .withOpacity(.7),
               ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

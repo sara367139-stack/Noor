@@ -9,10 +9,10 @@ import 'prayer_time_tile.dart';
 class PrayerTimeline extends StatelessWidget {
   final PrayerModel prayers;
 
-  const PrayerTimeline({
-    super.key,
-    required this.prayers,
-  });
+ const PrayerTimeline({
+  super.key,
+  required this.prayers,
+});
 
   DateTime _parseTime(String time) {
     final now = DateTime.now();

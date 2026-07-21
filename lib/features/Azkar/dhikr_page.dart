@@ -6,8 +6,6 @@ import 'package:noorah/features/home/widgets/home_bottom_navigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vibration/vibration.dart';
 
-
-
 import '../../core/theme/app_text_styles.dart';
 
 class DhikrPage extends StatefulWidget {
@@ -20,31 +18,146 @@ class DhikrPage extends StatefulWidget {
 class _DhikrPageState extends State<DhikrPage> {
   int counter = 0;
   int current = 0;
+  bool isReady = false;
 
- late SharedPreferences prefs;
+  late SharedPreferences prefs;
 
-Future<void> initPrefs() async {
-  prefs = await SharedPreferences.getInstance();
-  loadCounter();
-}
+  Future<void> initPrefs() async {
+    prefs = await SharedPreferences.getInstance();
+    current = prefs.getInt('current_dhikr') ?? 0;
+    if (current < 0 || current >= adhkar.length) current = 0;
+    counter = prefs.getInt("dhikr_$current") ?? 0;
 
-Future<void> loadCounter() async {
-  counter = prefs.getInt("dhikr_$current") ?? 0;
-
-  if (mounted) {
-    setState(() {});
+    if (mounted) {
+      setState(() {
+        isReady = true;
+      });
+    }
   }
-}
 
-Future<void> saveCounter() async {
-  await prefs.setInt("dhikr_$current", counter);
-}
+  Future<void> loadCounter() async {
+    counter = prefs.getInt("dhikr_$current") ?? 0;
 
-@override
-void initState() {
-  super.initState();
-  initPrefs();
-}
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  Future<void> saveProgress() async {
+    await prefs.setInt("dhikr_$current", counter);
+    await prefs.setInt('current_dhikr', current);
+  }
+
+  Future<void> completeCurrentDhikr() async {
+    final completedDhikr = adhkar[current];
+    final nextIndex = (current + 1) % adhkar.length;
+    final nextDhikr = adhkar[nextIndex];
+
+    await prefs.setInt("dhikr_$current", completedDhikr.target);
+    await prefs.setInt("dhikr_$nextIndex", 0);
+    await prefs.setInt('current_dhikr', nextIndex);
+
+    if (!mounted) return;
+
+    setState(() {
+      current = nextIndex;
+      counter = 0;
+    });
+
+   showModalBottomSheet(
+  isScrollControlled: true,
+      context: context,
+      backgroundColor: Theme.of(context).cardColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+      ),
+      builder: (sheetContext) {
+      return SafeArea(
+  child: Padding(
+    padding: const EdgeInsets.fromLTRB(24, 24, 24, 30),
+    child: SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+                const Icon(
+                  Icons.check_circle_rounded,
+                  color: Colors.green,
+                  size: 72,
+                ),
+                const SizedBox(height: 18),
+                Text(
+                  "ما شاء الله",
+                  style: AppTextStyles.heading1.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "اكتملت ${completedDhikr.target} مرة. الذكر التالي:",
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: .7),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  nextDhikr.title,
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.heading3.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+                const SizedBox(height: 18),
+             SizedBox(
+  width: double.infinity,
+  height: 50,
+  child: ElevatedButton(
+    onPressed: () => Navigator.pop(sheetContext),
+    child: const Text(
+      "ابدأ الذكر التالي",
+      style: TextStyle(fontSize: 18),
+    ),
+  ),
+),
+              ],
+            ),
+          ),
+  ),
+      );
+      }
+    );
+  }
+
+  Future<void> incrementCounter() async {
+    final hasVibrator = await Vibration.hasVibrator();
+    if (hasVibrator) {
+      Vibration.vibrate(duration: 40);
+    }
+
+    final dhikr = adhkar[current];
+
+    if (counter + 1 >= dhikr.target) {
+      setState(() {
+        counter = dhikr.target;
+      });
+      await completeCurrentDhikr();
+      return;
+    }
+
+    setState(() {
+      counter++;
+    });
+
+    await saveProgress();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initPrefs();
+  }
 
   // Future<void> loadCunter() async {
   //   prefs = await SharedPreferences.getInstance();
@@ -57,12 +170,14 @@ void initState() {
 
   @override
   Widget build(BuildContext context) {
+    if (!isReady) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
     final dhikr = adhkar[current];
 
     return Scaffold(
-       bottomNavigationBar: const HomeBottomNavigation(
-        currentIndex: 2,
-),  
+      bottomNavigationBar: const HomeBottomNavigation(currentIndex: 2),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -74,26 +189,25 @@ void initState() {
         padding: const EdgeInsets.all(24),
         child: Column(
           children: [
-           DropdownButton<int>(
-  value: current,
-  isExpanded: true,
-  dropdownColor: Theme.of(context).cardColor,
-  style: TextStyle(
-    color: Theme.of(context).colorScheme.onSurface,
-  ),
-  items: List.generate(
-    adhkar.length,
-    (index) => DropdownMenuItem(
-      value: index,
-      child: Text(adhkar[index].title),
-    ),
-  ),
-  onChanged: (value) async {
-    current = value!;
-    await loadCounter();
-    setState(() {});
-  },
-),
+            DropdownButton<int>(
+              value: current,
+              isExpanded: true,
+              dropdownColor: Theme.of(context).cardColor,
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              items: List.generate(
+                adhkar.length,
+                (index) => DropdownMenuItem(
+                  value: index,
+                  child: Text(adhkar[index].title),
+                ),
+              ),
+              onChanged: (value) async {
+                if (value == null) return;
+                current = value;
+                await prefs.setInt('current_dhikr', current);
+                await loadCounter();
+              },
+            ),
             const SizedBox(height: 50),
 
             Text(
@@ -109,121 +223,23 @@ void initState() {
             //   count: counter,
             //   target: dhikr.target,
             // ),
-             DhikrCounter(
-     count: counter,
-      target: dhikr.target,
-     ),
+            DhikrCounter(count: counter, target: dhikr.target),
 
-     const SizedBox(height: 15),
+            const SizedBox(height: 15),
 
-     Text(
-      "${((counter / dhikr.target) * 100).clamp(0, 100).toStringAsFixed(0)}%",
-       style: AppTextStyles.heading3.copyWith(
-      color: Theme.of(context).colorScheme.onSurface,
-      ),
-      ),
-
-     const Spacer(), 
+            Text(
+              "${((counter / dhikr.target) * 100).clamp(0, 100).toStringAsFixed(0)}%",
+              style: AppTextStyles.heading3.copyWith(
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+            ),
 
             const Spacer(),
 
             SizedBox(
               width: double.infinity,
               height: 60,
-              child: DhikrButton(
-               onTap: () async {
-  // ignore: dead_code
-            if (await Vibration.hasVibrator()) {
-                Vibration.vibrate(duration: 40);
-                     }
-
-                   setState(() {
-                 counter++;
-                    });
-                  await saveCounter();
-                  await prefs.setInt('counter', counter);
-                  await prefs.setInt('current', current);
-
-                  if (counter == dhikr.target) {
-                    if (!mounted) return;
-                     // داخل showModalBottomSheet
-
-showModalBottomSheet(
-  // ignore: use_build_context_synchronously
-  context: context,
-  // ignore: use_build_context_synchronously
-  backgroundColor: Theme.of(context).cardColor,
-  shape: const RoundedRectangleBorder(
-    borderRadius: BorderRadius.vertical(
-      top: Radius.circular(25),
-    ),
-  ),
-  builder: (_) {
-    return SizedBox(
-      height: 250,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(
-            Icons.emoji_events,
-            color: Colors.amber,
-            size: 80,
-          ),
-
-          const SizedBox(height: 20),
-
-          Text(
-            "ما شاء الله 🎉",
-            style: AppTextStyles.heading1.copyWith(
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
-          ),
-
-          const SizedBox(height: 10),
-
-          Text(
-            "لقد أكملت ${dhikr.target} مرة",
-            style: AppTextStyles.bodyMedium.copyWith(
-              color: Theme.of(context)
-                  .colorScheme
-                  .onSurface
-                  // ignore: deprecated_member_use
-                  .withOpacity(.7),
-            ),
-          ),
-
-          const SizedBox(height: 20),
-
-          ElevatedButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("متابعة"),
-          ),
-        ],
-      ),
-    );
-  },
-);
-
-
-                    // showDialog(
-                    //   // ignore: use_build_context_synchronously
-                    //   context: context,
-                    //   builder: (_) => AlertDialog(
-                    //     title: const Text("🎉 أحسنت"),
-                    //     content: Text(
-                    //       "لقد أتممت ${dhikr.target} مرة من\n${dhikr.title}",
-                    //     ),
-                    //     actions: [
-                    //       TextButton(
-                    //         onPressed: () => Navigator.pop(context),
-                    //         child: const Text("متابعة"),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // );
-                  }
-                },
-              ),
+              child: DhikrButton(onTap: incrementCounter),
             ),
 
             const SizedBox(height: 15),
@@ -234,9 +250,7 @@ showModalBottomSheet(
                   counter = 0;
                 });
 
-                 await saveCounter();
-                await prefs.setInt('counter', counter);
-                await prefs.setInt('current', current);
+                await saveProgress();
               },
               child: const Text("إعادة"),
             ),

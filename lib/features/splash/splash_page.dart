@@ -1,8 +1,9 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:noorah/core/users/user_profile_provider.dart';
 
 import '../../../../core/constants/app_sizes.dart';
 import '../../../../core/constants/app_spacing.dart';
@@ -51,18 +52,21 @@ class _SplashPageState extends State<SplashPage>
     );
 
     controller.forward();
+Timer(const Duration(seconds: 3), () async {
 
-    Timer(const Duration(seconds: 3), () {
-      if (!mounted) return;
+  final hasProfile =
+      await UserProfileNotifier.hasSavedProfile();
 
-      final user = FirebaseAuth.instance.currentUser;
+  if (!mounted) return;
 
-      if (user != null) {
-        context.go('/home');
-      } else {
-        context.go('/login');
-      }
-    });
+  if (hasProfile) {
+    context.go('/home');
+  } else {
+    context.go('/setup');
+  }
+
+});
+  
   }
 
   @override
