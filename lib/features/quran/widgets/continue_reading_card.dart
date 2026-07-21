@@ -95,33 +95,22 @@ Future<SurahDetailsModel> loadSurah(int number) async {
 
 
       onTap: () async {
-
+        final navigator = Navigator.of(context);
 
         final details =
             await loadSurah(
               surahNumber,
             );
 
-
         if (!mounted) return;
 
-
-        Navigator.push(
-
-          context,
-
+        navigator.push(
           MaterialPageRoute(
-
-            builder: (_) =>
-                SurahDetailsPage(
-                  surah: details,
-                ),
-
+            builder: (_) => SurahDetailsPage(
+              surah: details,
+            ),
           ),
-
         );
-
-
       },
 
 

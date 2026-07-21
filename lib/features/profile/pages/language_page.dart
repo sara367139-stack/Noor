@@ -33,67 +33,58 @@ class _LanguagePageState extends ConsumerState<LanguagePage> {
 
       body: Padding(
         padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.language,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-
-            const SizedBox(height: AppSpacing.md),
-
-            Card(
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-                side: BorderSide(
-                  color: locale.languageCode == "ar"
-                      ? AppColors.primary
-                      : Colors.grey.shade300,
+        child: RadioGroup<String>(
+          groupValue: locale.languageCode,
+          onChanged: (value) {
+            if (value == null) return;
+            ref.read(languageProvider.notifier).changeLanguage(value);
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.language,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              child: RadioListTile<String>(
-                value: "ar",
-                groupValue: locale.languageCode,
-                activeColor: AppColors.primary,
-                title: const Text("العربية"),
-                onChanged: (value) {
-                  ref
-                      .read(languageProvider.notifier)
-                      .changeLanguage("ar");
-                },
-              ),
-            ),
-
-            const SizedBox(height: 12),
-
-            Card(
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-                side: BorderSide(
-                  color: locale.languageCode == "en"
-                      ? AppColors.primary
-                      : Colors.grey.shade300,
+              const SizedBox(height: AppSpacing.md),
+              Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  side: BorderSide(
+                    color: locale.languageCode == 'ar'
+                        ? AppColors.primary
+                        : Colors.grey.shade300,
+                  ),
+                ),
+                child: const RadioListTile<String>(
+                  value: 'ar',
+                  title: Text('العربية'),
+                  activeColor: AppColors.primary,
                 ),
               ),
-              child: RadioListTile<String>(
-                value: "en",
-                groupValue: locale.languageCode,
-                activeColor: AppColors.primary,
-                title: const Text("English"),
-                onChanged: (value) {
-                  ref
-                      .read(languageProvider.notifier)
-                      .changeLanguage("en");
-                },
+              const SizedBox(height: 12),
+              Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  side: BorderSide(
+                    color: locale.languageCode == 'en'
+                        ? AppColors.primary
+                        : Colors.grey.shade300,
+                  ),
+                ),
+                child: const RadioListTile<String>(
+                  value: 'en',
+                  title: Text('English'),
+                  activeColor: AppColors.primary,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

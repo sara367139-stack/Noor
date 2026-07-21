@@ -9,7 +9,9 @@ import 'package:vibration/vibration.dart';
 import '../../core/theme/app_text_styles.dart';
 
 class DhikrPage extends StatefulWidget {
-  const DhikrPage({super.key});
+  const DhikrPage({super.key, this.initialIndex});
+
+  final int? initialIndex;
 
   @override
   State<DhikrPage> createState() => _DhikrPageState();
@@ -26,6 +28,12 @@ class _DhikrPageState extends State<DhikrPage> {
     prefs = await SharedPreferences.getInstance();
     current = prefs.getInt('current_dhikr') ?? 0;
     if (current < 0 || current >= adhkar.length) current = 0;
+
+    if (widget.initialIndex != null && widget.initialIndex! >= 0 && widget.initialIndex! < adhkar.length) {
+      current = widget.initialIndex!;
+      await prefs.setInt('current_dhikr', current);
+    }
+
     counter = prefs.getInt("dhikr_$current") ?? 0;
 
     if (mounted) {

@@ -107,24 +107,18 @@ class _NotificationsPageState extends State<NotificationsPage> {
         borderRadius: BorderRadius.circular(16),
       ),
 
-      child: SwitchListTile(
-
-        // ignore: deprecated_member_use
-        activeColor: AppColors.primary,
-
+      child: SwitchListTile.adaptive(
+        activeThumbColor: AppColors.primary,
+        activeTrackColor: AppColors.primary.withAlpha(128),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         title: Text(
           title,
           style: const TextStyle(
             fontWeight: FontWeight.w600,
           ),
         ),
-
-        subtitle: Text(
-          subtitle,
-        ),
-
+        subtitle: Text(subtitle),
         value: value,
-
         onChanged: onChanged,
       ),
     );

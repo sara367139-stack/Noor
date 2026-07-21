@@ -41,9 +41,14 @@ GoRoute(
     ),
 
     GoRoute(
-    path: '/dhikr',
-    builder: (context, state) =>  DhikrPage(),
-),
+      path: '/dhikr',
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>?;
+        final initialIndex = extra?['initialIndex'] as int?;
+
+        return DhikrPage(initialIndex: initialIndex);
+      },
+    ),
 
    GoRoute(
   path: '/profile',

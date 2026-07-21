@@ -43,7 +43,10 @@ class AdhkarPage extends StatelessWidget {
               ),
               trailing: const Icon(Icons.arrow_forward_ios, size: 18),
               onTap: () {
-                context.push("/dhikr");
+                context.push(
+                  '/dhikr',
+                  extra: {'initialIndex': index},
+                );
               },
             ),
           );

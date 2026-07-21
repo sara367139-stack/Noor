@@ -18,35 +18,49 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   final ProfileService _profileService = ProfileService();
+  final _formKey = GlobalKey<FormState>();
 
   late TextEditingController nameController;
   late TextEditingController locationController;
-
   bool loading = false;
 
   @override
   void initState() {
     super.initState();
-
-    nameController =
-        TextEditingController(text: widget.currentName);
-
-    locationController =
-        TextEditingController(text: widget.currentLocation);
+    nameController = TextEditingController(text: widget.currentName);
+    locationController = TextEditingController(text: widget.currentLocation);
   }
 
   Future<void> save() async {
+    if (!_formKey.currentState!.validate()) return;
+
     setState(() {
       loading = true;
     });
 
-    await _profileService.updateProfile(
-      name: nameController.text.trim(),
-      location: locationController.text.trim(),
-    );
+    try {
+      await _profileService.updateProfile(
+        name: nameController.text.trim(),
+        location: locationController.text.trim(),
+      );
 
-    if (mounted) {
-      context.pop(true);
+      if (mounted) {
+        context.pop(true);
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Unable to save profile. Please try again.'),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          loading = false;
+        });
+      }
     }
   }
 
@@ -61,47 +75,63 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Edit Profile"),
+        title: const Text('Edit Profile'),
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(20),
-
-        child: Column(
-          children: [
-
-            TextField(
-              controller: nameController,
-              decoration: const InputDecoration(
-                labelText: "Name",
-                prefixIcon: Icon(Icons.person),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Name',
+                  prefixIcon: Icon(Icons.person),
+                ),
+                textInputAction: TextInputAction.next,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please enter your name.';
+                  }
+                  return null;
+                },
               ),
-            ),
-
-            const SizedBox(height: 20),
-
-            TextField(
-              controller: locationController,
-              decoration: const InputDecoration(
-                labelText: "Location",
-                prefixIcon: Icon(Icons.location_on),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: locationController,
+                decoration: const InputDecoration(
+                  labelText: 'Location',
+                  prefixIcon: Icon(Icons.location_on),
+                ),
+                textInputAction: TextInputAction.done,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please enter your location.';
+                  }
+                  return null;
+                },
+                onFieldSubmitted: (_) => save(),
               ),
-            ),
-
-            const SizedBox(height: 35),
-
-            SizedBox(
-              width: double.infinity,
-
-              child: ElevatedButton(
-                onPressed: loading ? null : save,
-
-                child: loading
-                    ? const CircularProgressIndicator()
-                    : const Text("Save"),
+              const SizedBox(height: 35),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: loading ? null : save,
+                  child: loading
+                      ? const SizedBox(
+                          height: 24,
+                          width: 24,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2.4,
+                            color: Colors.white,
+                          ),
+                        )
+                      : const Text('Save'),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

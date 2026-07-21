@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:noorah/l10n/app_localizations.dart';
-
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/theme/app_text_styles.dart';
@@ -25,7 +24,7 @@ class QuickActions extends StatelessWidget {
               title: lang.qibla,
               subtitle: lang.finder,
               onTap: () {
-                context.push("/qibla");
+                context.push('/qibla');
               },
             ),
           ),
