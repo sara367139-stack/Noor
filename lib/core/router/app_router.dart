@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:noorah/features/Azkar/adhkar_page.dart';
 import 'package:noorah/features/Azkar/dhikr_page.dart';
 import 'package:noorah/features/home/home_page.dart';
-import 'package:noorah/features/home/widgets/setup/setup_pages.dart';
 import 'package:noorah/features/profile/pages/language_page.dart';
 import 'package:noorah/features/profile/pages/notifications_page.dart';
 import 'package:noorah/features/profile/pages/rate_page.dart';
@@ -32,12 +31,6 @@ final GoRouter appRouter = GoRouter(
       path: '/language',
       builder: (context, state) => const LanguagePage(),
     ),
-
-
-GoRoute(
-  path: "/setup",
-  builder: (context, state) => const SetupPage(),
-),
     GoRoute(
       path: '/notifications',
       builder: (context, state) => const NotificationsPage(),

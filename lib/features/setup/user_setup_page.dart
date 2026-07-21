@@ -6,6 +6,7 @@ import 'package:noorah/core/constants/app_radius.dart';
 import 'package:noorah/core/constants/app_spacing.dart';
 import 'package:noorah/core/theme/app_text_styles.dart';
 import 'package:noorah/core/user/user_profile_provider.dart';
+import 'package:noorah/features/setup/capital_city_field.dart';
 
 class UserSetupPage extends ConsumerStatefulWidget {
   const UserSetupPage({super.key});
@@ -114,22 +115,10 @@ class _UserSetupPageState extends ConsumerState<UserSetupPage> {
                       },
                     ),
                     const SizedBox(height: AppSpacing.lg),
-                    TextFormField(
+                    CapitalCityField(
                       controller: _locationController,
                       textInputAction: TextInputAction.done,
-                      decoration: const InputDecoration(
-                        labelText: 'Location',
-                        hintText: 'City, Country',
-                        prefixIcon: Icon(Icons.location_on_outlined),
-                        border: OutlineInputBorder(),
-                      ),
-                      onFieldSubmitted: (_) => _saveProfile(),
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Please enter your location';
-                        }
-                        return null;
-                      },
+                      onSubmitted: _saveProfile,
                     ),
                     const SizedBox(height: AppSpacing.xl),
                     FilledButton.icon(

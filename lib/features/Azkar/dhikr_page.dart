@@ -68,17 +68,22 @@ class _DhikrPageState extends State<DhikrPage> {
 
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       backgroundColor: Theme.of(context).cardColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
       ),
       builder: (sheetContext) {
-        return SizedBox(
-          height: 270,
-          child: Padding(
-            padding: const EdgeInsets.all(24),
+        return SafeArea(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(
+              left: 24,
+              right: 24,
+              top: 24,
+              bottom: MediaQuery.of(sheetContext).viewInsets.bottom + 24,
+            ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 const Icon(
                   Icons.check_circle_rounded,
@@ -106,14 +111,19 @@ class _DhikrPageState extends State<DhikrPage> {
                 Text(
                   nextDhikr.title,
                   textAlign: TextAlign.center,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.heading3.copyWith(
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(height: 18),
-                ElevatedButton(
-                  onPressed: () => Navigator.pop(sheetContext),
-                  child: const Text("ابدأ الذكر التالي"),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(sheetContext),
+                    child: const Text("ابدأ الذكر التالي"),
+                  ),
                 ),
               ],
             ),

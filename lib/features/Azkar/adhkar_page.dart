@@ -36,6 +36,8 @@ class AdhkarPage extends StatelessWidget {
               leading: const Icon(Icons.auto_awesome, color: Colors.green),
               title: Text(
                 adhkar[index],
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,

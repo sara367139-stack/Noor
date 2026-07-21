@@ -26,7 +26,7 @@ try {
   });
 
   // ignore: avoid_print
-  print("Firestore Connected ✅");
+  print("Firestore Connected.");
 } catch (e) {
   // ignore: avoid_print
   print("Firestore Error: $e");

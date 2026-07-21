@@ -52,7 +52,6 @@ dependencies:
 
   # Location & Compass
   geolocator: ^14.0.2
-  flutter_compass: ^0.8.1
 
   # Animation
   flutter_animate: ^4.5.2
