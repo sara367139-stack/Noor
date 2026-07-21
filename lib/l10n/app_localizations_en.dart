@@ -127,4 +127,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get goodEvening => 'Good Evening';
+
+  @override
+  String get morningAdhkar => 'Morning Adhkar';
+
+  @override
+  String get eveningAdhkar => 'Evening Adhkar';
+
+  @override
+  String get morningSubtitle => 'Start your day with remembrance';
+
+  @override
+  String get eveningSubtitle => 'End your day with remembrance';
+
+  @override
+  String get completed => 'Completed';
+
+  @override
+  String get remaining => 'Remaining';
 }

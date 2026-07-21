@@ -17,11 +17,11 @@ class QuickActions extends StatelessWidget {
         children: [
           Expanded(
             child: _ActionCard(
-              icon: Icons.explore,
-              title: "Qibla",
-              subtitle: "Finder",
+              icon: Icons.wb_sunny_outlined,
+              title: "Morning",
+              subtitle: "Morning Adhkar",
               onTap: () {
-                context.push('/qibla');
+                context.push("/morning-adhkar");
               },
             ),
           ),
@@ -30,11 +30,11 @@ class QuickActions extends StatelessWidget {
 
           Expanded(
             child: _ActionCard(
-              icon: Icons.auto_awesome,
-              title: "Muslim",
-              subtitle: "Adhkar",
+              icon: Icons.nightlight_round,
+              title: "Evening",
+              subtitle: "Evening Adhkar",
               onTap: () {
-                context.push("/adhkar");
+                context.push("/evening-adhkar");
               },
             ),
           ),
@@ -75,12 +75,16 @@ class _ActionCard extends StatelessWidget {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary
-                    // ignore: deprecated_member_use
+                color: Theme.of(context)
+                    .colorScheme
+                    .primary
                     .withOpacity(.15),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(icon, color: Theme.of(context).colorScheme.primary),
+              child: Icon(
+                icon,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
 
             const SizedBox(height: 18),
@@ -99,8 +103,9 @@ class _ActionCard extends StatelessWidget {
             Text(
               subtitle,
               style: AppTextStyles.bodySmall.copyWith(
-                color: Theme.of(context).colorScheme.onSurface
-                    // ignore: deprecated_member_use
+                color: Theme.of(context)
+                    .colorScheme
+                    .onSurface
                     .withOpacity(.7),
               ),
               maxLines: 2,

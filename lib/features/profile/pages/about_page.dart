@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:noorah/core/constants/app_colors.dart';
 import 'package:noorah/core/constants/app_spacing.dart';
+import 'package:noorah/core/constants/app_strings.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -20,9 +21,9 @@ class AboutPage extends StatelessWidget {
             }
           },
         ),
-        title: const Text(
-          "About Noorah",
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          "About ${AppStrings.appName}",
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -32,9 +33,9 @@ class AboutPage extends StatelessWidget {
 
         child: Column(
           children: [
-            const Text(
-              "Noorah",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            Text(
+              AppStrings.appName,
+              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
 
             const SizedBox(height: 8),

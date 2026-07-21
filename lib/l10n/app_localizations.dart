@@ -334,6 +334,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Good Evening'**
   String get goodEvening;
+
+  /// No description provided for @morningAdhkar.
+  ///
+  /// In en, this message translates to:
+  /// **'Morning Adhkar'**
+  String get morningAdhkar;
+
+  /// No description provided for @eveningAdhkar.
+  ///
+  /// In en, this message translates to:
+  /// **'Evening Adhkar'**
+  String get eveningAdhkar;
+
+  /// No description provided for @morningSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start your day with remembrance'**
+  String get morningSubtitle;
+
+  /// No description provided for @eveningSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'End your day with remembrance'**
+  String get eveningSubtitle;
+
+  /// No description provided for @completed.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get completed;
+
+  /// No description provided for @remaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining'**
+  String get remaining;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:noorah/core/constants/app_colors.dart';
 import 'package:noorah/core/constants/app_radius.dart';
 import 'package:noorah/core/constants/app_spacing.dart';
+import 'package:noorah/core/constants/app_strings.dart';
 import 'package:noorah/core/theme/app_text_styles.dart';
 import 'package:noorah/core/user/user_profile_provider.dart';
 import 'package:noorah/features/setup/capital_city_field.dart';
@@ -87,7 +88,7 @@ class _UserSetupPageState extends ConsumerState<UserSetupPage> {
                     ),
                     const SizedBox(height: AppSpacing.xl),
                     Text(
-                      'Welcome to Noorah',
+                      'Welcome to ${AppStrings.appName}',
                       style: AppTextStyles.heading1.copyWith(
                         color: colorScheme.onSurface,
                       ),

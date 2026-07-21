@@ -1,6 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:noorah/features/Azkar/adhkar_page.dart';
 import 'package:noorah/features/Azkar/dhikr_page.dart';
+import 'package:noorah/features/Azkar/pages/evening_adhkar_pages.dart';
+import 'package:noorah/features/Azkar/pages/morning_adhkar_pages.dart';
 import 'package:noorah/features/home/home_page.dart';
 import 'package:noorah/features/profile/pages/language_page.dart';
 import 'package:noorah/features/profile/pages/notifications_page.dart';
@@ -40,5 +42,14 @@ final GoRouter appRouter = GoRouter(
     GoRoute(path: "/qibla", builder: (context, state) => const QiblaPage()),
 
     GoRoute(path: '/adhkar', builder: (context, state) => const AdhkarPage()),
+    GoRoute(
+  path: "/morning-adhkar",
+  builder: (context, state) => const MorningAdhkarPage(),
+),
+
+GoRoute(
+  path: "/evening-adhkar",
+  builder: (context, state) => const EveningAdhkarPage(),
+),
   ],
 );

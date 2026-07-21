@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:noorah/core/constants/app_colors.dart';
 import 'package:noorah/core/constants/app_spacing.dart';
+import 'package:noorah/core/constants/app_strings.dart';
 
 class RatePage extends StatefulWidget {
   const RatePage({super.key});
@@ -27,9 +28,9 @@ class _RatePageState extends State<RatePage> {
             }
           },
         ),
-        title: const Text(
-          "Rate Noorah",
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          "Rate ${AppStrings.appName}",
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -41,9 +42,9 @@ class _RatePageState extends State<RatePage> {
           mainAxisAlignment: MainAxisAlignment.center,
 
           children: [
-            const Text(
-              "Enjoying Noorah?",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            Text(
+              "Enjoying ${AppStrings.appName}?",
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
 
             const SizedBox(height: 8),

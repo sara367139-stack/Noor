@@ -39,5 +39,11 @@
   "isha": "Isha",
   "goodMorning":"Good Morning",
   "goodAfternoon":"Good Afternoon",
-   "goodEvening":"Good Evening"
+   "goodEvening":"Good Evening" ,
+    "morningAdhkar": "Morning Adhkar",
+  "eveningAdhkar": "Evening Adhkar",
+  "morningSubtitle": "Start your day with remembrance",
+  "eveningSubtitle": "End your day with remembrance",
+ "completed": "Completed",
+"remaining": "Remaining"
 }

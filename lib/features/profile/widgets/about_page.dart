@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:noorah/core/constants/app_strings.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -8,7 +9,7 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("About Noorah"),
+        title: Text("About ${AppStrings.appName}"),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
           onPressed: () {
@@ -25,8 +26,8 @@ class AboutPage extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "Noorah",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              AppStrings.appName,
+              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
             Text("Your Daily Islamic Companion", textAlign: TextAlign.center),

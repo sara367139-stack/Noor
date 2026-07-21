@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:noorah/core/constants/app_strings.dart';
 import 'package:noorah/core/user/user_profile_provider.dart';
 import 'package:noorah/features/home/widgets/home_bottom_navigation.dart';
 import 'package:noorah/features/profile/widgets/dark_mode_tile.dart';
@@ -78,7 +79,7 @@ class ProfilePage extends ConsumerWidget {
 
           ProfileTile(
             icon: Icons.info,
-            title: "About Noorah",
+            title: "About ${AppStrings.appName}",
             onTap: () {
               context.push('/about');
             },

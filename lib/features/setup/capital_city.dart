@@ -640,4 +640,56 @@ const fallbackCapitalCities = <CapitalCity>[
     latitude: 14.7167,
     longitude: -17.4677,
   ),
+
+
+
+    CapitalCity(
+    city: 'Alexandria',
+    country: 'Egypt',
+    countryCode: 'EG',
+    latitude: 31.2001,
+    longitude: 29.9187,
+  ),
+  CapitalCity(
+    city: 'Giza',
+    country: 'Egypt',
+    countryCode: 'EG',
+    latitude: 30.0131,
+    longitude: 31.2089,
+  ),
+  CapitalCity(
+    city: 'Luxor',
+    country: 'Egypt',
+    countryCode: 'EG',
+    latitude: 25.6872,
+    longitude: 32.6396,
+  ),
+  CapitalCity(
+    city: 'Aswan',
+    country: 'Egypt',
+    countryCode: 'EG',
+    latitude: 24.0889,
+    longitude: 32.8998,
+  ),
+    CapitalCity(
+    city: 'Jeddah',
+    country: 'Saudi Arabia',
+    countryCode: 'SA',
+    latitude: 21.4858,
+    longitude: 39.1925,
+  ),
+  CapitalCity(
+    city: 'Mecca',
+    country: 'Saudi Arabia',
+    countryCode: 'SA',
+    latitude: 21.3891,
+    longitude: 39.8579,
+  ),
+  CapitalCity(
+    city: 'Medina',
+    country: 'Saudi Arabia',
+    countryCode: 'SA',
+    latitude: 24.5247,
+    longitude: 39.5692,
+  ),
 ];
