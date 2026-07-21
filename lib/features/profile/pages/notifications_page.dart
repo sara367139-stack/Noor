@@ -109,7 +109,6 @@ class _NotificationsPageState extends State<NotificationsPage> {
         subtitle: Text(subtitle),
 
         value: value,
-
         onChanged: onChanged,
       ),
     );

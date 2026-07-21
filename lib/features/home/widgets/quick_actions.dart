@@ -21,7 +21,7 @@ class QuickActions extends StatelessWidget {
               title: "Qibla",
               subtitle: "Finder",
               onTap: () {
-                context.push("/qibla");
+                context.push('/qibla');
               },
             ),
           ),

@@ -1,12 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_radius.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import 'surah_data.dart';
+
+import 'surah_details_model.dart';
 import 'surah_details_page.dart';
+
 
 class ContinueReadingCard extends StatefulWidget {
   const ContinueReadingCard({super.key});
@@ -19,13 +24,16 @@ class _ContinueReadingCardState extends State<ContinueReadingCard> {
   String surahName = "Al-Fatihah";
   int surahNumber = 1;
 
+
   @override
   void initState() {
     super.initState();
     loadLastRead();
   }
 
+
   Future<void> loadLastRead() async {
+
     final prefs = await SharedPreferences.getInstance();
 
     if (!mounted) return;
@@ -35,6 +43,28 @@ class _ContinueReadingCardState extends State<ContinueReadingCard> {
       surahNumber = prefs.getInt("last_surah_number") ?? 1;
     });
   }
+
+
+
+Future<SurahDetailsModel> loadSurah(int number) async {
+
+  final fileName = number.toString();
+
+  final jsonString =
+      await rootBundle.loadString(
+        "assets/quran/surah/surah_$fileName.json",
+      );
+
+
+  final jsonData = json.decode(jsonString);
+
+
+  return SurahDetailsModel.fromJson(
+    jsonData,
+  );
+}
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +78,10 @@ class _ContinueReadingCardState extends State<ContinueReadingCard> {
           MaterialPageRoute(builder: (_) => SurahDetailsPage(surah: surah)),
         );
       },
+
+
       child: Container(
+
         width: double.infinity,
         margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
         padding: const EdgeInsets.all(AppSpacing.lg),
@@ -99,6 +132,7 @@ class _ContinueReadingCardState extends State<ContinueReadingCard> {
                   ),
                 ],
               ),
+
             ),
             const SizedBox(width: AppSpacing.md),
             Container(
@@ -112,10 +146,17 @@ class _ContinueReadingCardState extends State<ContinueReadingCard> {
                 Icons.play_arrow_rounded,
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
+
             ),
+
+
           ],
+
         ),
+
       ),
+
     );
+
   }
 }

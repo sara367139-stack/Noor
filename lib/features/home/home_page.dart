@@ -11,6 +11,7 @@ import 'package:noorah/features/home/widgets/daily_ayah_card.dart';
 import 'package:noorah/features/home/widgets/greeting_header.dart';
 import 'package:noorah/features/home/widgets/home_bottom_navigation.dart';
 import 'package:noorah/features/home/widgets/prayer_countdown_card.dart';
+import 'package:noorah/features/home/widgets/prayer_provider.dart';
 import 'package:noorah/features/home/widgets/prayer_timeline.dart';
 import 'package:noorah/features/home/widgets/quick_actions.dart';
 
@@ -45,7 +46,6 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   void dispose() {
     timer?.cancel();
-
     super.dispose();
   }
 

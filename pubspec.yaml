@@ -45,7 +45,7 @@ dependencies:
   hive_flutter: ^1.1.0
 
   # UI
-  google_fonts: ^6.3.0
+  google_fonts: ^8.2.0
   
   flutter_svg: ^2.2.0
   # intl: ^0.20.2
@@ -68,6 +68,7 @@ dependencies:
   hijri: ^3.0.1
   firebase_storage: ^13.4.5
   image_picker: ^1.2.3
+  flutter_qiblah: ^3.2.0
 
   
 

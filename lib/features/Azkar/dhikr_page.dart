@@ -9,7 +9,9 @@ import 'package:vibration/vibration.dart';
 import '../../core/theme/app_text_styles.dart';
 
 class DhikrPage extends StatefulWidget {
-  const DhikrPage({super.key});
+  const DhikrPage({super.key, this.initialIndex});
+
+  final int? initialIndex;
 
   @override
   State<DhikrPage> createState() => _DhikrPageState();

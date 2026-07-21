@@ -126,8 +126,8 @@ class _LanguagePageState extends ConsumerState<LanguagePage> {
                 icon: const Icon(Icons.check_rounded),
                 label: const Text('Confirm'),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
