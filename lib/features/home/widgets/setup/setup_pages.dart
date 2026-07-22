@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:noorah/core/users/user_profile_provider.dart';
 import 'package:noorah/features/setup/capital_city_field.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 class SetupPage extends ConsumerStatefulWidget {
   const SetupPage({super.key});
@@ -20,9 +21,10 @@ class _SetupPageState extends ConsumerState<SetupPage> {
   Future<void> save() async {
     if (nameController.text.trim().isEmpty ||
         locationController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
+      final l10n = AppLocalizations.of(context)!;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.pleaseFillAllFields)),
+      );
       return;
     }
 
@@ -41,8 +43,10 @@ class _SetupPageState extends ConsumerState<SetupPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Welcome")),
+      appBar: AppBar(title: Text(l10n.welcome)),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -51,7 +55,7 @@ class _SetupPageState extends ConsumerState<SetupPage> {
 
             TextField(
               controller: nameController,
-              decoration: const InputDecoration(labelText: "Your Name"),
+              decoration: InputDecoration(labelText: l10n.yourName),
             ),
 
             const SizedBox(height: 20),
@@ -66,7 +70,7 @@ class _SetupPageState extends ConsumerState<SetupPage> {
                 onPressed: loading ? null : save,
                 child: loading
                     ? const CircularProgressIndicator()
-                    : const Text("Continue"),
+                    : Text(l10n.confirm),
               ),
             ),
           ],

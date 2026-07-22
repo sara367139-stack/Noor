@@ -56,10 +56,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-// import '../../../../../core/constants/app_colors.dart';
-
-// import '../../../../../core/constants/app_colors.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 class HomeBottomNavigation extends StatelessWidget {
   final int currentIndex;
@@ -68,11 +65,16 @@ class HomeBottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return BottomNavigationBar(
       currentIndex: currentIndex,
       type: BottomNavigationBarType.fixed,
       selectedItemColor: Theme.of(context).colorScheme.primary,
-      unselectedItemColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+      unselectedItemColor: Theme.of(context)
+          .colorScheme
+          .onSurface
+          .withValues(alpha: 0.7),
       onTap: (index) {
         switch (index) {
           case 0:
@@ -89,13 +91,19 @@ class HomeBottomNavigation extends StatelessWidget {
             break;
         }
       },
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: 'Quran'),
-        BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Dhikr'),
+      items: [
+        BottomNavigationBarItem(icon: const Icon(Icons.home), label: l10n.home),
         BottomNavigationBarItem(
-          icon: Icon(Icons.tune_rounded),
-          label: 'Settings',
+          icon: const Icon(Icons.menu_book),
+          label: l10n.quran,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.favorite),
+          label: l10n.adhkar,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.tune_rounded),
+          label: l10n.settings,
         ),
       ],
     );

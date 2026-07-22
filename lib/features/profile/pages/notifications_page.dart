@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:noorah/core/constants/app_colors.dart';
 import 'package:noorah/core/constants/app_spacing.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 class NotificationsPage extends StatefulWidget {
   const NotificationsPage({super.key});
@@ -17,6 +18,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -29,9 +32,9 @@ class _NotificationsPageState extends State<NotificationsPage> {
             }
           },
         ),
-        title: const Text(
-          "Notifications",
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          l10n.notifications,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -42,16 +45,16 @@ class _NotificationsPageState extends State<NotificationsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Notification Settings",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Text(
+              l10n.notificationSettings,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
 
             const SizedBox(height: AppSpacing.md),
 
             _notificationTile(
-              title: "Prayer Times",
-              subtitle: "Get notified when prayer time arrives",
+              title: l10n.prayerTimesNotification,
+              subtitle: l10n.prayerTimesNotificationDescription,
               value: prayerNotification,
               onChanged: (value) {
                 setState(() {
@@ -61,8 +64,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
             ),
 
             _notificationTile(
-              title: "Daily Azkar",
-              subtitle: "Morning and evening reminders",
+              title: l10n.dailyAzkarNotification,
+              subtitle: l10n.dailyAzkarNotificationDescription,
               value: azkarNotification,
               onChanged: (value) {
                 setState(() {
@@ -72,8 +75,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
             ),
 
             _notificationTile(
-              title: "Daily Quran",
-              subtitle: "A daily reminder to read Quran",
+              title: l10n.dailyQuranNotification,
+              subtitle: l10n.dailyQuranNotificationDescription,
               value: quranNotification,
               onChanged: (value) {
                 setState(() {

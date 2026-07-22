@@ -4,12 +4,15 @@ import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/theme/app_text_styles.dart';
+import '../../../l10n/app_localizations.dart';
 
 class QuickActions extends StatelessWidget {
   const QuickActions({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
       child: Row(
@@ -18,8 +21,8 @@ class QuickActions extends StatelessWidget {
           Expanded(
             child: _ActionCard(
               icon: Icons.wb_sunny_outlined,
-              title: "Morning",
-              subtitle: "Morning Adhkar",
+              title: l10n.goodMorning,
+              subtitle: l10n.morningAdhkar,
               onTap: () {
                 context.push("/morning-adhkar");
               },
@@ -31,8 +34,8 @@ class QuickActions extends StatelessWidget {
           Expanded(
             child: _ActionCard(
               icon: Icons.nightlight_round,
-              title: "Evening",
-              subtitle: "Evening Adhkar",
+              title: l10n.goodEvening,
+              subtitle: l10n.eveningAdhkar,
               onTap: () {
                 context.push("/evening-adhkar");
               },

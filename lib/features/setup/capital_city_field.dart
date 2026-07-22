@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:noorah/features/setup/capital_city.dart';
 import 'package:noorah/features/setup/capital_city_repository.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 class CapitalCityField extends StatefulWidget {
   const CapitalCityField({
@@ -37,6 +38,8 @@ class _CapitalCityFieldState extends State<CapitalCityField> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return FutureBuilder<List<CapitalCity>>(
       future: _citiesFuture,
       builder: (context, snapshot) {
@@ -71,8 +74,8 @@ class _CapitalCityFieldState extends State<CapitalCityField> {
                   focusNode: focusNode,
                   textInputAction: widget.textInputAction,
                   decoration: InputDecoration(
-                    labelText: 'Capital city',
-                    hintText: 'Search Cairo, Egypt',
+                    labelText: l10n.capitalCity,
+                    hintText: l10n.searchCapitalCity,
                     prefixIcon: const Icon(Icons.location_city_outlined),
                     suffixIcon: isLoading
                         ? const Padding(
@@ -93,11 +96,11 @@ class _CapitalCityFieldState extends State<CapitalCityField> {
                     );
 
                     if (normalized.isEmpty) {
-                      return 'Please choose your capital city';
+                      return l10n.pleaseChooseCapitalCity;
                     }
 
                     if (!hasMatch) {
-                      return 'Please select a city from the list';
+                      return l10n.pleaseSelectCityFromList;
                     }
 
                     return null;

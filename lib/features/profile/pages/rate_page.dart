@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:noorah/core/constants/app_colors.dart';
 import 'package:noorah/core/constants/app_spacing.dart';
 import 'package:noorah/core/constants/app_strings.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 class RatePage extends StatefulWidget {
   const RatePage({super.key});
@@ -16,6 +17,8 @@ class _RatePageState extends State<RatePage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -29,7 +32,7 @@ class _RatePageState extends State<RatePage> {
           },
         ),
         title: Text(
-          "Rate ${AppStrings.appName}",
+          l10n.ratePageTitle.replaceAll('AL Noor', AppStrings.appName),
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -43,16 +46,16 @@ class _RatePageState extends State<RatePage> {
 
           children: [
             Text(
-              "Enjoying ${AppStrings.appName}?",
+              l10n.enjoyingApp.replaceAll('AL Noor', AppStrings.appName),
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
 
             const SizedBox(height: 8),
 
-            const Text(
-              "Your feedback helps us improve your daily Islamic journey.",
+            Text(
+              l10n.feedbackHelp,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
 
             const SizedBox(height: AppSpacing.lg),
@@ -102,15 +105,15 @@ class _RatePageState extends State<RatePage> {
                     ? null
                     : () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Thank you for your rating 🤍"),
+                          SnackBar(
+                            content: Text(l10n.thankYouRating),
                           ),
                         );
                       },
 
-                child: const Text(
-                  "Submit Rating",
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                child: Text(
+                  l10n.submitRating,
+                  style: const TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
             ),

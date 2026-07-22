@@ -3,12 +3,15 @@ import 'package:go_router/go_router.dart';
 import 'package:noorah/core/constants/app_colors.dart';
 import 'package:noorah/core/constants/app_spacing.dart';
 import 'package:noorah/core/constants/app_strings.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -22,7 +25,7 @@ class AboutPage extends StatelessWidget {
           },
         ),
         title: Text(
-          "About ${AppStrings.appName}",
+          '${l10n.about} ${AppStrings.appName}',
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -40,38 +43,35 @@ class AboutPage extends StatelessWidget {
 
             const SizedBox(height: 8),
 
-            const Text(
-              "Your Daily Islamic Companion",
-              style: TextStyle(fontSize: 16),
+            Text(
+              l10n.appTagline,
+              style: const TextStyle(fontSize: 16),
             ),
 
             const SizedBox(height: AppSpacing.lg),
 
             _aboutCard(
               icon: Icons.info_outline,
-              title: "About App",
-              description:
-                  "Noorah helps you stay connected with your faith through Quran, Salah, Azkar, and Islamic daily reminders.",
+              title: l10n.aboutApp,
+              description: l10n.aboutAppDescription,
             ),
 
             _aboutCard(
               icon: Icons.star_outline,
-              title: "Features",
-              description:
-                  "• Quran Reader\n• Prayer Times\n• Qibla Direction\n• Daily Azkar\n• Islamic Calendar",
+              title: l10n.features,
+              description: l10n.featuresList,
             ),
 
             _aboutCard(
               icon: Icons.update,
-              title: "Version",
-              description: "Version 1.0.0",
+              title: l10n.version,
+              description: l10n.versionNumber,
             ),
 
             _aboutCard(
               icon: Icons.favorite_outline,
-              title: "Made With Love",
-              description:
-                  "Created to make your daily worship easier and more organized.",
+              title: l10n.madeWithLove,
+              description: l10n.madeWithLoveDescription,
             ),
           ],
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:noorah/features/profile/pages/profile_service.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 class EditProfilePage extends StatefulWidget {
   final String currentName;
@@ -32,6 +33,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   Future<void> save() async {
+    final l10n = AppLocalizations.of(context)!;
     if (!_formKey.currentState!.validate()) return;
 
     setState(() {
@@ -50,8 +52,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Unable to save profile. Please try again.'),
+          SnackBar(
+            content: Text(l10n.pleaseTryAgain),
           ),
         );
       }
@@ -73,9 +75,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile'),
+        title: Text(l10n.editProfile),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -85,14 +89,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
             children: [
               TextFormField(
                 controller: nameController,
-                decoration: const InputDecoration(
-                  labelText: 'Name',
+                decoration: InputDecoration(
+                  labelText: l10n.yourName,
                   prefixIcon: Icon(Icons.person),
                 ),
                 textInputAction: TextInputAction.next,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'Please enter your name.';
+                    return l10n.pleaseEnterYourName;
                   }
                   return null;
                 },
@@ -100,14 +104,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
               const SizedBox(height: 20),
               TextFormField(
                 controller: locationController,
-                decoration: const InputDecoration(
-                  labelText: 'Location',
+                decoration: InputDecoration(
+                  labelText: l10n.location,
                   prefixIcon: Icon(Icons.location_on),
                 ),
                 textInputAction: TextInputAction.done,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'Please enter your location.';
+                    return l10n.pleaseEnterYourLocation;
                   }
                   return null;
                 },
@@ -127,7 +131,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             color: Colors.white,
                           ),
                         )
-                      : const Text('Save'),
+                      : Text(l10n.confirm),
                 ),
               ),
             ],

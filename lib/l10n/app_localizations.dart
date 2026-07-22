@@ -101,6 +101,12 @@ abstract class AppLocalizations {
   /// **'Language'**
   String get language;
 
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
   /// No description provided for @home.
   ///
   /// In en, this message translates to:
@@ -197,11 +203,11 @@ abstract class AppLocalizations {
   /// **'Error loading prayer times'**
   String get errorLoadingPrayerTimes;
 
-  /// No description provided for @chooseLanguage.
+  /// No description provided for @chooseYourLanguage.
   ///
   /// In en, this message translates to:
   /// **'Choose your language'**
-  String get chooseLanguage;
+  String get chooseYourLanguage;
 
   /// No description provided for @english.
   ///
@@ -370,6 +376,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Remaining'**
   String get remaining;
+
+  /// No description provided for @appName.
+  String get appName;
+
+  /// No description provided for @appTagline.
+  String get appTagline;
+
+  /// No description provided for @morning.
+  String get morning;
+
+  /// No description provided for @evening.
+  String get evening;
+
+  /// No description provided for @aboutApp.
+  String get aboutApp;
+
+  /// No description provided for @aboutAppDescription.
+  String get aboutAppDescription;
+
+  /// No description provided for @features.
+  String get features;
+
+  /// No description provided for @featuresList.
+  String get featuresList;
+
+  /// No description provided for @version.
+  String get version;
+
+  /// No description provided for @versionNumber.
+  String get versionNumber;
+
+  /// No description provided for @madeWithLove.
+  String get madeWithLove;
+
+  /// No description provided for @madeWithLoveDescription.
+  String get madeWithLoveDescription;
+
+  /// No description provided for @notificationSettings.
+  String get notificationSettings;
+
+  /// No description provided for @prayerTimesNotification.
+  String get prayerTimesNotification;
+
+  /// No description provided for @prayerTimesNotificationDescription.
+  String get prayerTimesNotificationDescription;
+
+  /// No description provided for @dailyAzkarNotification.
+  String get dailyAzkarNotification;
+
+  /// No description provided for @dailyAzkarNotificationDescription.
+  String get dailyAzkarNotificationDescription;
+
+  /// No description provided for @dailyQuranNotification.
+  String get dailyQuranNotification;
+
+  /// No description provided for @dailyQuranNotificationDescription.
+  String get dailyQuranNotificationDescription;
+
+  /// No description provided for @ratePageTitle.
+  String get ratePageTitle;
+
+  /// No description provided for @enjoyingApp.
+  String get enjoyingApp;
+
+  /// No description provided for @feedbackHelp.
+  String get feedbackHelp;
+
+  /// No description provided for @thankYouRating.
+  String get thankYouRating;
+
+  /// No description provided for @submitRating.
+  String get submitRating;
+
+  /// No description provided for @pleaseFillAllFields.
+  String get pleaseFillAllFields;
+
+  /// No description provided for @yourName.
+  String get yourName;
+
+  /// No description provided for @saving.
+  String get saving;
+
+  /// No description provided for @welcomeToApp.
+  String get welcomeToApp;
+
+  /// No description provided for @tellUsYourName.
+  String get tellUsYourName;
+
+  /// No description provided for @pleaseEnterYourName.
+  String get pleaseEnterYourName;
+
+  /// No description provided for @pleaseEnterYourLocation.
+  String get pleaseEnterYourLocation;
+
+  /// No description provided for @pleaseTryAgain.
+  String get pleaseTryAgain;
+
+  /// No description provided for @capitalCity.
+  String get capitalCity;
+
+  /// No description provided for @searchCapitalCity.
+  String get searchCapitalCity;
+
+  /// No description provided for @pleaseChooseCapitalCity.
+  String get pleaseChooseCapitalCity;
+
+  /// No description provided for @pleaseSelectCityFromList.
+  String get pleaseSelectCityFromList;
+
+  /// No description provided for @unableToCheckDeviceSupport.
+  String get unableToCheckDeviceSupport;
+
+  /// No description provided for @compassNotSupported.
+  String get compassNotSupported;
+
+  /// No description provided for @deviceDoesNotSupportCompass.
+  String get deviceDoesNotSupportCompass;
+
+  /// No description provided for @unableToGetLocationStatus.
+  String get unableToGetLocationStatus;
+
+  /// No description provided for @locationServiceDisabled.
+  String get locationServiceDisabled;
+
+  /// No description provided for @enableLocationServices.
+  String get enableLocationServices;
+
+  /// No description provided for @openLocationSettings.
+  String get openLocationSettings;
+
+  /// No description provided for @permissionDeniedForever.
+  String get permissionDeniedForever;
+
+  /// No description provided for @locationPermissionRequired.
+  String get locationPermissionRequired;
+
+  /// No description provided for @grantLocationPermission.
+  String get grantLocationPermission;
+
+  /// No description provided for @allowPermission.
+  String get allowPermission;
+
+  /// No description provided for @openAppSettings.
+  String get openAppSettings;
+
+  /// No description provided for @unableToReadCompassValues.
+  String get unableToReadCompassValues;
+
+  /// No description provided for @qiblaDirection.
+  String get qiblaDirection;
+
+  /// No description provided for @pointYourPhoneTowardKaaba.
+  String get pointYourPhoneTowardKaaba;
+
+  /// No description provided for @refresh.
+  String get refresh;
+
+  /// No description provided for @personalSettings.
+  String get personalSettings;
+
+  /// No description provided for @editProfile.
+  String get editProfile;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
