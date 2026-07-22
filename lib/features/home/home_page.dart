@@ -13,6 +13,7 @@ import 'package:noorah/features/home/widgets/home_bottom_navigation.dart';
 import 'package:noorah/features/home/widgets/prayer_countdown_card.dart';
 import 'package:noorah/features/home/widgets/prayer_timeline.dart';
 import 'package:noorah/features/home/widgets/quick_actions.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -52,6 +53,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final prayer = ref.watch(prayerProvider);
     final userProfile = ref.watch(userProfileProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     if (!userProfile.isLoaded) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
@@ -85,7 +87,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
                 error: (error, stack) => Padding(
                   padding: const EdgeInsets.all(20),
-                  child: Text("Error loading prayer times"),
+                  child: Text(l10n.errorLoadingPrayerTimes),
                 ),
 
                 data: (data) {

@@ -5,6 +5,7 @@ import 'package:noorah/core/constants/app_colors.dart';
 import 'package:noorah/core/constants/app_radius.dart';
 import 'package:noorah/core/constants/app_spacing.dart';
 import 'package:noorah/core/theme/app_text_styles.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String userName;
@@ -21,6 +22,7 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     final displayName = userName.trim();
     final cleanLocation = location.trim();
     final initials = displayName
@@ -54,7 +56,7 @@ class ProfileHeader extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        initials.isEmpty ? 'Settings' : 'Personal settings',
+                        initials.isEmpty ? l10n.settings : l10n.personalSettings,
                         style: AppTextStyles.bodySmall.copyWith(
                           color: colorScheme.onPrimary.withValues(alpha: .76),
                           fontWeight: FontWeight.w700,
@@ -96,7 +98,7 @@ class ProfileHeader extends StatelessWidget {
                   ),
                 ),
                 IconButton.filledTonal(
-                  tooltip: 'Edit profile',
+                  tooltip: l10n.editProfile,
                   onPressed: onEdit,
                   icon: const Icon(Icons.edit_outlined),
                 ),
@@ -106,10 +108,10 @@ class ProfileHeader extends StatelessWidget {
             Wrap(
               spacing: AppSpacing.sm,
               runSpacing: AppSpacing.sm,
-              children: const [
-                _ProfileStat(icon: Icons.menu_book_rounded, label: 'Quran'),
-                _ProfileStat(icon: Icons.explore_rounded, label: 'Qibla'),
-                _ProfileStat(icon: Icons.auto_awesome_rounded, label: 'Azkar'),
+              children: [
+                _ProfileStat(icon: Icons.menu_book_rounded, label: l10n.quran),
+                _ProfileStat(icon: Icons.explore_rounded, label: l10n.qibla),
+                _ProfileStat(icon: Icons.auto_awesome_rounded, label: l10n.adhkar),
               ],
             ),
           ],

@@ -8,6 +8,7 @@ import 'package:noorah/features/profile/widgets/dark_mode_tile.dart';
 import 'package:noorah/features/profile/widgets/profile_header.dart';
 
 import 'package:noorah/features/profile/widgets/profile_tile.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -15,6 +16,7 @@ class ProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userProfile = ref.watch(userProfileProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     if (!userProfile.isLoaded) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
@@ -34,7 +36,7 @@ class ProfilePage extends ConsumerWidget {
       bottomNavigationBar: const HomeBottomNavigation(currentIndex: 3),
 
       appBar: AppBar(
-        title: const Text("Profile"),
+        title: Text(l10n.profile),
         centerTitle: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
@@ -55,7 +57,7 @@ class ProfilePage extends ConsumerWidget {
 
           ProfileTile(
             icon: Icons.language,
-            title: "Language",
+            title: l10n.language,
             onTap: () {
               context.push('/language');
             },
@@ -63,7 +65,7 @@ class ProfilePage extends ConsumerWidget {
 
           ProfileTile(
             icon: Icons.notifications,
-            title: "Notifications",
+            title: l10n.notifications,
             onTap: () {
               context.push('/notifications');
             },
@@ -71,7 +73,7 @@ class ProfilePage extends ConsumerWidget {
 
           ProfileTile(
             icon: Icons.star,
-            title: "Rate App",
+            title: l10n.rateApp,
             onTap: () {
               context.push('/rate');
             },
@@ -79,7 +81,7 @@ class ProfilePage extends ConsumerWidget {
 
           ProfileTile(
             icon: Icons.info,
-            title: "About ${AppStrings.appName}",
+            title: '${l10n.about} ${AppStrings.appName}',
             onTap: () {
               context.push('/about');
             },

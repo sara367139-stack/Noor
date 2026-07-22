@@ -12,6 +12,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get language => 'Language';
 
   @override
+  String get confirm => 'Confirm';
+
+  @override
   String get home => 'Home';
 
   @override
@@ -60,7 +63,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorLoadingPrayerTimes => 'Error loading prayer times';
 
   @override
-  String get chooseLanguage => 'Choose your language';
+  String get chooseYourLanguage => 'Choose your language';
 
   @override
   String get english => 'English';
@@ -145,4 +148,166 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get remaining => 'Remaining';
+
+  @override
+  String get appName => 'AL Noor';
+
+  @override
+  String get appTagline => 'Your Daily Islamic Companion';
+
+  @override
+  String get morning => 'Morning';
+
+  @override
+  String get evening => 'Evening';
+
+  @override
+  String get aboutApp => 'About App';
+
+  @override
+  String get aboutAppDescription => 'Noorah helps you stay connected with your faith through Quran, Salah, Azkar, and Islamic daily reminders.';
+
+  @override
+  String get features => 'Features';
+
+  @override
+  String get featuresList => '• Quran Reader\n• Prayer Times\n• Qibla Direction\n• Daily Azkar\n• Islamic Calendar';
+
+  @override
+  String get version => 'Version';
+
+  @override
+  String get versionNumber => 'Version 1.0.0';
+
+  @override
+  String get madeWithLove => 'Made With Love';
+
+  @override
+  String get madeWithLoveDescription => 'Created to make your daily worship easier and more organized.';
+
+  @override
+  String get notificationSettings => 'Notification Settings';
+
+  @override
+  String get prayerTimesNotification => 'Prayer Times';
+
+  @override
+  String get prayerTimesNotificationDescription => 'Get notified when prayer time arrives';
+
+  @override
+  String get dailyAzkarNotification => 'Daily Azkar';
+
+  @override
+  String get dailyAzkarNotificationDescription => 'Morning and evening reminders';
+
+  @override
+  String get dailyQuranNotification => 'Daily Quran';
+
+  @override
+  String get dailyQuranNotificationDescription => 'A daily reminder to read Quran';
+
+  @override
+  String get ratePageTitle => 'Rate AL Noor';
+
+  @override
+  String get enjoyingApp => 'Enjoying AL Noor?';
+
+  @override
+  String get feedbackHelp => 'Your feedback helps us improve your daily Islamic journey.';
+
+  @override
+  String get thankYouRating => 'Thank you for your rating 🤍';
+
+  @override
+  String get submitRating => 'Submit Rating';
+
+  @override
+  String get pleaseFillAllFields => 'Please fill all fields';
+
+  @override
+  String get yourName => 'Your Name';
+
+  @override
+  String get saving => 'Saving...';
+
+  @override
+  String get welcomeToApp => 'Welcome to AL Noor';
+
+  @override
+  String get tellUsYourName => 'Tell us your name and location so your app feels personal from the first screen.';
+
+  @override
+  String get pleaseEnterYourName => 'Please enter your name';
+
+  @override
+  String get pleaseEnterYourLocation => 'Please enter your location.';
+
+  @override
+  String get pleaseTryAgain => 'Unable to save profile. Please try again.';
+
+  @override
+  String get capitalCity => 'Capital city';
+
+  @override
+  String get searchCapitalCity => 'Search Cairo, Egypt';
+
+  @override
+  String get pleaseChooseCapitalCity => 'Please choose your capital city';
+
+  @override
+  String get pleaseSelectCityFromList => 'Please select a city from the list';
+
+  @override
+  String get unableToCheckDeviceSupport => 'Unable to check device support.';
+
+  @override
+  String get compassNotSupported => 'Compass not supported';
+
+  @override
+  String get deviceDoesNotSupportCompass => 'This device doesn\'t support a compass sensor.';
+
+  @override
+  String get unableToGetLocationStatus => 'Unable to get location status.';
+
+  @override
+  String get locationServiceDisabled => 'Location service is disabled';
+
+  @override
+  String get enableLocationServices => 'Please enable location services to display the Qibla direction.';
+
+  @override
+  String get openLocationSettings => 'Open Location Settings';
+
+  @override
+  String get permissionDeniedForever => 'Permission denied forever';
+
+  @override
+  String get locationPermissionRequired => 'Location permission required';
+
+  @override
+  String get grantLocationPermission => 'Grant location permission from app settings.';
+
+  @override
+  String get allowPermission => 'Allow Permission';
+
+  @override
+  String get openAppSettings => 'Open App Settings';
+
+  @override
+  String get unableToReadCompassValues => 'Unable to read compass values.';
+
+  @override
+  String get qiblaDirection => 'Qibla Direction';
+
+  @override
+  String get pointYourPhoneTowardKaaba => 'Point your phone toward the Kaaba';
+
+  @override
+  String get refresh => 'Refresh';
+
+  @override
+  String get personalSettings => 'Personal settings';
+
+  @override
+  String get editProfile => 'Edit profile';
 }

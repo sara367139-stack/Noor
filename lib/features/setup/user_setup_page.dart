@@ -8,6 +8,7 @@ import 'package:noorah/core/constants/app_strings.dart';
 import 'package:noorah/core/theme/app_text_styles.dart';
 import 'package:noorah/core/user/user_profile_provider.dart';
 import 'package:noorah/features/setup/capital_city_field.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 class UserSetupPage extends ConsumerStatefulWidget {
   const UserSetupPage({super.key});
@@ -53,6 +54,7 @@ class _UserSetupPageState extends ConsumerState<UserSetupPage> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final userProfile = ref.watch(userProfileProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     if (!_didPrefill && userProfile.isLoaded) {
       _didPrefill = true;
@@ -88,14 +90,14 @@ class _UserSetupPageState extends ConsumerState<UserSetupPage> {
                     ),
                     const SizedBox(height: AppSpacing.xl),
                     Text(
-                      'Welcome to ${AppStrings.appName}',
+                      l10n.welcomeToApp.replaceAll('AL Noor', AppStrings.appName),
                       style: AppTextStyles.heading1.copyWith(
                         color: colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Text(
-                      'Tell us your name and location so your app feels personal from the first screen.',
+                      l10n.tellUsYourName,
                       style: AppTextStyles.bodyMedium.copyWith(
                         color: colorScheme.onSurface.withValues(alpha: .68),
                       ),
@@ -104,13 +106,13 @@ class _UserSetupPageState extends ConsumerState<UserSetupPage> {
                     TextFormField(
                       controller: _nameController,
                       textInputAction: TextInputAction.next,
-                      decoration: const InputDecoration(
-                        labelText: 'Your name',
+                      decoration: InputDecoration(
+                        labelText: l10n.yourName,
                         border: OutlineInputBorder(),
                       ),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Please enter your name';
+                          return l10n.pleaseEnterYourName;
                         }
                         return null;
                       },
@@ -131,7 +133,7 @@ class _UserSetupPageState extends ConsumerState<UserSetupPage> {
                               child: CircularProgressIndicator(strokeWidth: 2),
                             )
                           : const Icon(Icons.check_rounded),
-                      label: Text(_isSaving ? 'Saving...' : 'Continue'),
+                      label: Text(_isSaving ? l10n.saving : l10n.confirm),
                     ),
                   ],
                 ),

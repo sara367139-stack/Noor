@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:noorah/l10n/app_localizations.dart';
 
 class QiblaPage extends StatefulWidget {
   const QiblaPage({super.key});
@@ -62,9 +63,11 @@ class _QiblaPageState extends State<QiblaPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Qibla'),
+        title: Text(l10n.qibla),
         centerTitle: true,
       ),
       body: FutureBuilder<bool?>(
@@ -75,14 +78,14 @@ class _QiblaPageState extends State<QiblaPage> {
           }
 
           if (deviceSnapshot.hasError) {
-            return _buildError(context, 'Unable to check device support.');
+            return _buildError(context, l10n.unableToCheckDeviceSupport);
           }
 
           if (deviceSnapshot.data == false) {
             return _buildMessage(
               context,
-              title: 'Compass not supported',
-              message: "This device doesn't support a compass sensor.",
+              title: l10n.compassNotSupported,
+              message: l10n.deviceDoesNotSupportCompass,
             );
           }
 
@@ -94,7 +97,7 @@ class _QiblaPageState extends State<QiblaPage> {
               }
 
               if (locationSnapshot.hasError || !locationSnapshot.hasData) {
-                return _buildError(context, 'Unable to get location status.');
+                return _buildError(context, l10n.unableToGetLocationStatus);
               }
 
               final status = locationSnapshot.data!;
@@ -102,12 +105,11 @@ class _QiblaPageState extends State<QiblaPage> {
               if (!status.enabled) {
                 return _buildStatusCard(
                   context,
-                  title: 'Location service is disabled',
-                  message:
-                      'Please enable location services to display the Qibla direction.',
-                  primaryLabel: 'Open Location Settings',
+                  title: l10n.locationServiceDisabled,
+                  message: l10n.enableLocationServices,
+                  primaryLabel: l10n.openLocationSettings,
                   onPrimaryPressed: _openLocationSettings,
-                  secondaryLabel: 'Retry',
+                  secondaryLabel: l10n.refresh,
                   onSecondaryPressed: _refreshStatus,
                 );
               }
@@ -119,15 +121,15 @@ class _QiblaPageState extends State<QiblaPage> {
                 return _buildStatusCard(
                   context,
                   title: deniedForever
-                      ? 'Permission denied forever'
-                      : 'Location permission required',
+                      ? l10n.permissionDeniedForever
+                      : l10n.locationPermissionRequired,
                   message: deniedForever
-                      ? 'Grant location permission from app settings.'
-                      : 'Please allow location access to display the Qibla direction.',
-                  primaryLabel: deniedForever ? 'Open App Settings' : 'Allow Permission',
+                      ? l10n.grantLocationPermission
+                      : l10n.enableLocationServices,
+                  primaryLabel: deniedForever ? l10n.openAppSettings : l10n.allowPermission,
                   onPrimaryPressed:
                       deniedForever ? _openAppSettings : _requestPermission,
-                  secondaryLabel: 'Retry',
+                  secondaryLabel: l10n.refresh,
                   onSecondaryPressed: _refreshStatus,
                   isPrimaryLoading: _isRequestingPermission,
                 );
@@ -141,7 +143,7 @@ class _QiblaPageState extends State<QiblaPage> {
                   }
 
                   if (qiblahSnapshot.hasError || !qiblahSnapshot.hasData) {
-                    return _buildError(context, 'Unable to read compass values.');
+                    return _buildError(context, l10n.unableToReadCompassValues);
                   }
 
                   return _buildQiblaView(context, qiblahSnapshot.data!);
@@ -155,12 +157,14 @@ class _QiblaPageState extends State<QiblaPage> {
   }
 
   Widget _buildQiblaView(BuildContext context, QiblahDirection direction) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Qibla Direction',
+            l10n.qiblaDirection,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 40),
@@ -191,15 +195,15 @@ class _QiblaPageState extends State<QiblaPage> {
             ),
           ),
           const SizedBox(height: 10),
-          const Text(
-            'Point your phone toward the Kaaba',
+          Text(
+            l10n.pointYourPhoneTowardKaaba,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 30),
           ElevatedButton.icon(
             onPressed: _refreshStatus,
             icon: const Icon(Icons.refresh),
-            label: const Text('Refresh'),
+            label: Text(l10n.refresh),
           ),
         ],
       ),
@@ -275,6 +279,8 @@ class _QiblaPageState extends State<QiblaPage> {
     required String title,
     required String message,
   }) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -294,7 +300,7 @@ class _QiblaPageState extends State<QiblaPage> {
             const SizedBox(height: 22),
             ElevatedButton(
               onPressed: _refreshStatus,
-              child: const Text('Retry'),
+              child: Text(l10n.refresh),
             ),
           ],
         ),
