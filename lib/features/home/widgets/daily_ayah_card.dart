@@ -77,7 +77,6 @@
 // }
 
 import 'package:flutter/material.dart';
-import 'package:noorah/l10n/app_localizations.dart';
 
 import '../../../../../core/constants/app_radius.dart';
 import '../../../../../core/constants/app_spacing.dart';
@@ -88,8 +87,6 @@ class DailyAyahCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lang = AppLocalizations.of(context)!;
-
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.symmetric(
@@ -105,7 +102,7 @@ class DailyAyahCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            lang.dailyAyah,
+            "Daily Ayah",
             style: AppTextStyles.heading3.copyWith(
               color: Theme.of(context).colorScheme.onSurface,
             ),
@@ -114,7 +111,7 @@ class DailyAyahCard extends StatelessWidget {
           const SizedBox(height: AppSpacing.md),
 
           Text(
-            'Indeed, with hardship comes ease.',
+            "Indeed, with hardship comes ease.",
             style: AppTextStyles.bodyMedium.copyWith(
               color: Theme.of(context).colorScheme.onSurface,
             ),
@@ -125,9 +122,11 @@ class DailyAyahCard extends StatelessWidget {
           const SizedBox(height: AppSpacing.sm),
 
           Text(
-            lang.location,
+            "Surah Ash-Sharh",
             style: AppTextStyles.bodySmall.copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+              color: Theme.of(context).colorScheme.onSurface
+                  // ignore: deprecated_member_use
+                  .withOpacity(.7),
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

@@ -52,7 +52,6 @@ dependencies:
 
   # Location & Compass
   geolocator: ^14.0.2
-  flutter_compass: ^0.8.1
 
   # Animation
   flutter_animate: ^4.5.2
@@ -99,7 +98,6 @@ flutter:
 
   assets:
     - assets/quran/surah/
-    - assets/images/profile.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

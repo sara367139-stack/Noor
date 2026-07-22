@@ -6,14 +6,10 @@ import '../../../../core/constants/app_radius.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
 
-
 class AyahTile extends StatelessWidget {
   final AyahModel ayah;
 
-  const AyahTile({
-    super.key,
-    required this.ayah,
-  });
+  const AyahTile({super.key, required this.ayah});
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +26,14 @@ class AyahTile extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            backgroundColor: AppColors.primary,
+          Container(
+            width: 40,
+            height: 40,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: AppColors.primary,
+              borderRadius: BorderRadius.circular(AppRadius.full),
+            ),
             child: Text(
               ayah.number.toString(),
               style: TextStyle(color: Theme.of(context).colorScheme.onSurface),

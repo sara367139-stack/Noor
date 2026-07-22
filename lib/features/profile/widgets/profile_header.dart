@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:noorah/core/constants/app_colors.dart';
+import 'package:noorah/core/constants/app_radius.dart';
+import 'package:noorah/core/constants/app_spacing.dart';
 import 'package:noorah/core/theme/app_text_styles.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -18,120 +20,132 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final initials = userName.trim().isNotEmpty
-        ? userName.trim()[0].toUpperCase()
-        : 'N';
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
+    final colorScheme = Theme.of(context).colorScheme;
+    final displayName = userName.trim();
+    final cleanLocation = location.trim();
+    final initials = displayName
+        .split(RegExp(r'\s+'))
+        .where((part) => part.isNotEmpty)
+        .take(2)
+        .map((part) => part[0].toUpperCase())
+        .join();
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(20),
+    return DecoratedBox(
       decoration: BoxDecoration(
-        color: theme.cardColor,
-        borderRadius: BorderRadius.circular(28),
+        color: AppColors.primary,
+        borderRadius: BorderRadius.circular(AppRadius.lg),
         boxShadow: [
           BoxShadow(
-            color: theme.shadowColor.withOpacity(0.08),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            color: colorScheme.primary.withValues(alpha: .22),
+            blurRadius: 24,
+            offset: const Offset(0, 12),
           ),
         ],
       ),
-      child: Column(
-        children: [
-          Container(
-            width: 92,
-            height: 92,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                colors: isDark
-                    ? [AppColors.primary.withOpacity(0.9), AppColors.primary.withOpacity(0.3)]
-                    : [AppColors.primary, AppColors.primary.withOpacity(0.6)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primary.withOpacity(0.18),
-                  blurRadius: 18,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-            ),
-            child: Center(
-              child: Text(
-                initials,
-                style: AppTextStyles.heading2.copyWith(
-                  color: Colors.white,
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 18),
-          Text(
-            userName.isNotEmpty ? userName : 'Noorah User',
-            style: AppTextStyles.heading2.copyWith(
-              color: theme.colorScheme.onSurface,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 8),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-            decoration: BoxDecoration(
-              color: theme.dividerColor.withOpacity(0.12),
-              borderRadius: BorderRadius.circular(999),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
               children: [
-                Icon(
-                  Icons.location_on_outlined,
-                  color: theme.colorScheme.onSurface.withOpacity(0.7),
-                  size: 18,
-                ),
-                const SizedBox(width: 6),
-                Flexible(
-                  child: Text(
-                    location.isNotEmpty ? location : 'Add your location',
-                    style: AppTextStyles.bodySmall.copyWith(
-                      color: theme.colorScheme.onSurface.withOpacity(0.7),
-                    ),
-                    overflow: TextOverflow.ellipsis,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        initials.isEmpty ? 'Settings' : 'Personal settings',
+                        style: AppTextStyles.bodySmall.copyWith(
+                          color: colorScheme.onPrimary.withValues(alpha: .76),
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: AppSpacing.xs),
+                      Text(
+                        displayName,
+                        style: AppTextStyles.heading2.copyWith(
+                          color: colorScheme.onPrimary,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: AppSpacing.xs),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.location_on_outlined,
+                            size: 18,
+                            color: colorScheme.onPrimary.withValues(alpha: .82),
+                          ),
+                          const SizedBox(width: AppSpacing.xs),
+                          Expanded(
+                            child: Text(
+                              cleanLocation,
+                              style: AppTextStyles.bodyMedium.copyWith(
+                                color: colorScheme.onPrimary.withValues(
+                                  alpha: .82,
+                                ),
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
+                IconButton.filledTonal(
+                  tooltip: 'Edit profile',
+                  onPressed: onEdit,
+                  icon: const Icon(Icons.edit_outlined),
+                ),
               ],
             ),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            'Your Daily Islamic Companion',
-            style: AppTextStyles.bodyMedium.copyWith(
-              color: theme.colorScheme.onSurface.withOpacity(0.68),
+            const SizedBox(height: AppSpacing.lg),
+            Wrap(
+              spacing: AppSpacing.sm,
+              runSpacing: AppSpacing.sm,
+              children: const [
+                _ProfileStat(icon: Icons.menu_book_rounded, label: 'Quran'),
+                _ProfileStat(icon: Icons.explore_rounded, label: 'Qibla'),
+                _ProfileStat(icon: Icons.auto_awesome_rounded, label: 'Azkar'),
+              ],
             ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 22),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: onEdit,
-              icon: const Icon(Icons.edit_outlined, size: 18),
-              label: const Text('Edit Profile'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: theme.colorScheme.primary,
-                foregroundColor: theme.colorScheme.onPrimary,
-                elevation: 0,
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ProfileStat extends StatelessWidget {
+  final IconData icon;
+  final String label;
+
+  const _ProfileStat({required this.icon, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: .14),
+        borderRadius: BorderRadius.circular(AppRadius.full),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 18, color: Colors.white),
+          const SizedBox(width: AppSpacing.xs),
+          Text(
+            label,
+            style: AppTextStyles.bodySmall.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ],

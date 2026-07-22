@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noorah/core/users/user_profile_provider.dart';
-
-
+import 'package:noorah/core/constants/app_strings.dart';
+import 'package:noorah/core/user/user_profile_provider.dart';
 import 'package:noorah/features/home/widgets/home_bottom_navigation.dart';
 import 'package:noorah/features/profile/widgets/dark_mode_tile.dart';
 import 'package:noorah/features/profile/widgets/profile_header.dart';
@@ -44,23 +43,11 @@ class ProfilePage extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 12, 20, 28),
         children: [
-ProfileHeader(
-  userName: userProfile.userName,
-  location: userProfile.location,
-  onEdit: () async {
-    final result = await context.push(
-      "/edit-profile",
-      extra: {
-        "name": userProfile.userName,
-        "location": userProfile.location,
-      },
-    );
-
-    if (result == true) {
-      await ref.read(userProfileProvider.notifier).load();
-    }
-  },
-),
+          ProfileHeader(
+            userName: userProfile.userName,
+            location: userProfile.location,
+            onEdit: () => context.go('/setup'),
+          ),
 
           const SizedBox(height: 30),
 
@@ -92,7 +79,7 @@ ProfileHeader(
 
           ProfileTile(
             icon: Icons.info,
-            title: "About Noorah",
+            title: "About ${AppStrings.appName}",
             onTap: () {
               context.push('/about');
             },

@@ -102,7 +102,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noorah/l10n/app_localizations.dart';
 
 import '../../../../../core/constants/app_spacing.dart';
 import '../../../../../core/theme/app_text_styles.dart';
@@ -114,14 +113,7 @@ class GreetingHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lang = AppLocalizations.of(context)!;
-    final displayName = userName.trim().isEmpty ? lang.profile : userName.trim();
-    final hour = DateTime.now().hour;
-    final greeting = hour < 12
-        ? lang.goodMorning
-        : hour < 17
-            ? lang.goodAfternoon
-            : lang.goodEvening;
+    final displayName = userName.trim();
 
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -135,12 +127,11 @@ class GreetingHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  greeting,
+                  "Assalamu Alaikum",
                   style: AppTextStyles.bodySmall.copyWith(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withValues(alpha: 0.7),
+                    color: Theme.of(context).colorScheme.onSurface
+                        // ignore: deprecated_member_use
+                        .withOpacity(.7),
                   ),
                 ),
 

@@ -36,18 +36,17 @@ class AdhkarPage extends StatelessWidget {
               leading: const Icon(Icons.auto_awesome, color: Colors.green),
               title: Text(
                 adhkar[index],
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               trailing: const Icon(Icons.arrow_forward_ios, size: 18),
-              onTap: () {
-                context.push(
-                  '/dhikr',
-                  extra: {'initialIndex': index},
-                );
-              },
+              // onTap: () {
+              //   context.push("/dhikr");
+              // },
             ),
           );
         },

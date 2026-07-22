@@ -28,12 +28,6 @@ class _DhikrPageState extends State<DhikrPage> {
     prefs = await SharedPreferences.getInstance();
     current = prefs.getInt('current_dhikr') ?? 0;
     if (current < 0 || current >= adhkar.length) current = 0;
-
-    if (widget.initialIndex != null && widget.initialIndex! >= 0 && widget.initialIndex! < adhkar.length) {
-      current = widget.initialIndex!;
-      await prefs.setInt('current_dhikr', current);
-    }
-
     counter = prefs.getInt("dhikr_$current") ?? 0;
 
     if (mounted) {
@@ -72,21 +66,25 @@ class _DhikrPageState extends State<DhikrPage> {
       counter = 0;
     });
 
-   showModalBottomSheet(
-  isScrollControlled: true,
+    showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       backgroundColor: Theme.of(context).cardColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
       ),
       builder: (sheetContext) {
-      return SafeArea(
-  child: Padding(
-    padding: const EdgeInsets.fromLTRB(24, 24, 24, 30),
-    child: SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
+        return SafeArea(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(
+              left: 24,
+              right: 24,
+              top: 24,
+              bottom: MediaQuery.of(sheetContext).viewInsets.bottom + 24,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
                 const Icon(
                   Icons.check_circle_rounded,
                   color: Colors.green,
@@ -113,28 +111,25 @@ class _DhikrPageState extends State<DhikrPage> {
                 Text(
                   nextDhikr.title,
                   textAlign: TextAlign.center,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
                   style: AppTextStyles.heading3.copyWith(
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 const SizedBox(height: 18),
-             SizedBox(
-  width: double.infinity,
-  height: 50,
-  child: ElevatedButton(
-    onPressed: () => Navigator.pop(sheetContext),
-    child: const Text(
-      "ابدأ الذكر التالي",
-      style: TextStyle(fontSize: 18),
-    ),
-  ),
-),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(sheetContext),
+                    child: const Text("ابدأ الذكر التالي"),
+                  ),
+                ),
               ],
             ),
           ),
-  ),
-      );
-      }
+        );
+      },
     );
   }
 

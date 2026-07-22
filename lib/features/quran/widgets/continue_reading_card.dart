@@ -3,32 +3,26 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:noorah/l10n/app_localizations.dart';
 
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_radius.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_text_styles.dart';
 
+import 'surah_data.dart';
 import 'surah_details_model.dart';
 import 'surah_details_page.dart';
-
 
 class ContinueReadingCard extends StatefulWidget {
   const ContinueReadingCard({super.key});
 
   @override
-  State<ContinueReadingCard> createState() =>
-      _ContinueReadingCardState();
+  State<ContinueReadingCard> createState() => _ContinueReadingCardState();
 }
 
-
-class _ContinueReadingCardState
-    extends State<ContinueReadingCard> {
-
+class _ContinueReadingCardState extends State<ContinueReadingCard> {
   String surahName = "Al-Fatihah";
   int surahNumber = 1;
-
 
   @override
   void initState() {
@@ -36,204 +30,110 @@ class _ContinueReadingCardState
     loadLastRead();
   }
 
-
   Future<void> loadLastRead() async {
-
     final prefs = await SharedPreferences.getInstance();
 
     if (!mounted) return;
 
     setState(() {
-
-      surahName =
-          prefs.getString("last_surah_name")
-          ?? "Al-Fatihah";
-
-
-      surahNumber =
-          prefs.getInt("last_surah_number")
-          ?? 1;
-
+      surahName = prefs.getString("last_surah_name") ?? "Al-Fatihah";
+      surahNumber = prefs.getInt("last_surah_number") ?? 1;
     });
   }
 
+  Future<SurahDetailsModel> loadSurah(int number) async {
+    final fileName = number.toString();
 
+    final jsonString = await rootBundle.loadString(
+      "assets/quran/surah/surah_$fileName.json",
+    );
 
-Future<SurahDetailsModel> loadSurah(int number) async {
+    final jsonData = json.decode(jsonString);
 
-  final fileName = number.toString();
-
-  final jsonString =
-      await rootBundle.loadString(
-        "assets/quran/surah/surah_$fileName.json",
-      );
-
-
-  final jsonData = json.decode(jsonString);
-
-
-  return SurahDetailsModel.fromJson(
-    jsonData,
-  );
-}
-
-
+    return SurahDetailsModel.fromJson(jsonData);
+  }
 
   @override
   Widget build(BuildContext context) {
-
-    final lang =
-        AppLocalizations.of(context)!;
-
-
     return InkWell(
+      borderRadius: BorderRadius.circular(AppRadius.lg),
+      onTap: () {
+        final surah = surahs.firstWhere((e) => e.number == surahNumber);
 
-      borderRadius:
-          BorderRadius.circular(
-            AppRadius.lg,
-          ),
-
-
-      onTap: () async {
-        final navigator = Navigator.of(context);
-
-        final details =
-            await loadSurah(
-              surahNumber,
-            );
-
-        if (!mounted) return;
-
-        navigator.push(
-          MaterialPageRoute(
-            builder: (_) => SurahDetailsPage(
-              surah: details,
-            ),
-          ),
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => SurahDetailsPage(surah: surah)),
         );
       },
 
-
       child: Container(
-
         width: double.infinity,
-
-
-        margin:
-            const EdgeInsets.symmetric(
-              horizontal: AppSpacing.lg,
-            ),
-
-
-        padding:
-            const EdgeInsets.all(
-              AppSpacing.lg,
-            ),
-
-
-
+        margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         decoration: BoxDecoration(
-
-          color:
-              AppColors.primary,
-
-
-          borderRadius:
-              BorderRadius.circular(
-                AppRadius.lg,
-              ),
-
-        ),
-
-
-
-        child: Column(
-
-          crossAxisAlignment:
-              CrossAxisAlignment.start,
-
-
-          children: [
-
-
-            Text(
-
-              lang.continueReading,
-
-              style:
-                  AppTextStyles.bodySmall
-                      .copyWith(
-
-                color:
-                    Theme.of(context)
-                        .colorScheme
-                        .onPrimary,
-
-              ),
-
+          color: AppColors.primary,
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(
+                context,
+              ).colorScheme.primary.withValues(alpha: .22),
+              blurRadius: 22,
+              offset: const Offset(0, 10),
             ),
-
-
-
-            const SizedBox(
-              height: 12,
-            ),
-
-
-
-            Text(
-
-              surahName,
-
-
-              style:
-                  AppTextStyles.heading2
-                      .copyWith(
-
-                color:
-                    Theme.of(context)
-                        .colorScheme
-                        .onPrimary,
-
-              ),
-
-            ),
-
-
-
-            const SizedBox(
-              height: 6,
-            ),
-
-
-
-            Text(
-
-              "${lang.surah} $surahNumber",
-
-
-              style:
-                  AppTextStyles.bodyMedium
-                      .copyWith(
-
-                color:
-                    Theme.of(context)
-                        .colorScheme
-                        .onPrimary,
-
-              ),
-
-            ),
-
-
           ],
-
         ),
-
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Continue Reading",
+                    style: AppTextStyles.bodySmall.copyWith(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onPrimary.withValues(alpha: .82),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    surahName,
+                    style: AppTextStyles.heading2.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    "Surah $surahNumber",
+                    style: AppTextStyles.bodyMedium.copyWith(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onPrimary.withValues(alpha: .82),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: AppSpacing.md),
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: .16),
+                borderRadius: BorderRadius.circular(AppRadius.full),
+              ),
+              child: Icon(
+                Icons.play_arrow_rounded,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+            ),
+          ],
+        ),
       ),
-
     );
-
   }
-
 }

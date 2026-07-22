@@ -39,5 +39,11 @@
   "isha": "العشاء",
   "goodMorning":"صباح الخير",
   "goodAfternoon":"مساء الخير",
-  "goodEvening":"مساء الخير"
+  "goodEvening":"مساء الخير" ,
+   "morningAdhkar": "أذكار الصباح",
+  "eveningAdhkar": "أذكار المساء",
+  "morningSubtitle": "ابدأ يومك بذكر الله",
+  "eveningSubtitle": "اختم يومك بذكر الله",
+ "completed": "مكتمل",
+"remaining": "متبقي"
 }

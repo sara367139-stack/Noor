@@ -127,4 +127,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get goodEvening => 'مساء الخير';
+
+  @override
+  String get morningAdhkar => 'أذكار الصباح';
+
+  @override
+  String get eveningAdhkar => 'أذكار المساء';
+
+  @override
+  String get morningSubtitle => 'ابدأ يومك بذكر الله';
+
+  @override
+  String get eveningSubtitle => 'اختم يومك بذكر الله';
+
+  @override
+  String get completed => 'مكتمل';
+
+  @override
+  String get remaining => 'متبقي';
 }

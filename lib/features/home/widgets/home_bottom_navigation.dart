@@ -56,7 +56,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:noorah/l10n/app_localizations.dart';
+
+// import '../../../../../core/constants/app_colors.dart';
 
 // import '../../../../../core/constants/app_colors.dart';
 
@@ -67,8 +68,6 @@ class HomeBottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final lang = AppLocalizations.of(context)!;
-
     return BottomNavigationBar(
       currentIndex: currentIndex,
       type: BottomNavigationBarType.fixed,
@@ -90,12 +89,15 @@ class HomeBottomNavigation extends StatelessWidget {
             break;
         }
       },
-      items: [
-        BottomNavigationBarItem(icon: const Icon(Icons.home), label: lang.home),
-        BottomNavigationBarItem(icon: const Icon(Icons.menu_book), label: lang.quran),
-        BottomNavigationBarItem(icon: const Icon(Icons.favorite), label: lang.adhkar),
-        BottomNavigationBarItem(icon: const Icon(Icons.person), label: lang.profile),
+      items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: 'Quran'),
+        BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Dhikr'),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.tune_rounded),
+          label: 'Settings',
+        ),
       ],
     );
   }
-} 
+}
